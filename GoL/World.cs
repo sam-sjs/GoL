@@ -11,9 +11,9 @@ namespace GoL
             return true;
         }
 
-        public void SetLivingCellAt(int x, int y)
+        public void SetLivingCellAt(Location location)
         {
-            LivingCells.Add(new Cell(x, y));
+            LivingCells.Add(new Cell(location));
         }
     }
 }

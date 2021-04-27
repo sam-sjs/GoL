@@ -2,13 +2,11 @@ namespace GoL
 {
     public class Cell
     {
-        public Cell(int x, int y)
+        public Cell(Location location)
         {
-            Xpos = x;
-            Ypos = y;
+            Location = location;
         }
-        public int Xpos { get; }
-        public int Ypos { get; }
+        public Location Location { get; }
         public bool IsAlive { get; set; } = true;
     }
 }

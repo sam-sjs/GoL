@@ -20,27 +20,25 @@ namespace GoLTests
         public void SetLivingCellAt_ShouldAddALivingCellToWorld()
         {
             World world = new World();
+            Location location = new Location(1, 2);
 
-            world.SetLivingCellAt(1, 1);
+            world.SetLivingCellAt(location);
             Cell lastCellAdded = world.LivingCells.Last();
             
             Assert.True(lastCellAdded.IsAlive);
         }
 
         [Fact]
-        public void SetLivingCellAt_ShouldCreateACellWithGivenCoords()
+        public void SetLivingCellAt_GivenLocation_CreatesCellWithLocation()
         {
             World world = new World();
-            int expectedX = 1;
-            int expectedY = 2;
+            Location expected = new Location(2, 2);
             
-            world.SetLivingCellAt(1, 2);
+            world.SetLivingCellAt(expected);
             Cell lastCellAdded = world.LivingCells.Last();
-            int actualX = lastCellAdded.Xpos;
-            int actualY = lastCellAdded.Ypos;
+            Location actual = lastCellAdded.Location;
             
-            Assert.Equal(expectedX, actualX);
-            Assert.Equal(expectedY, actualY);
+            Assert.Equal(expected, actual);
         }
     }
 }
