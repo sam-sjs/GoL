@@ -1,4 +1,3 @@
-using System.Linq;
 using GoL;
 using Xunit;
 
@@ -38,6 +37,18 @@ namespace GoLTests
             bool cellIsAlive = world.IsCellAliveAt(location);
             
             Assert.True(cellIsAlive);
+        }
+
+        [Fact]
+        public void NewWorld_ShouldNoLongerBeEmptyAfterAddingACell()
+        {
+            World world = new World();
+            Location location = new Location(1, 1);
+            world.SetLivingCellAt(location);
+            
+            bool worldIsEmpty = world.IsWorldEmpty();
+            
+            Assert.False(worldIsEmpty);
         }
     }
 }
