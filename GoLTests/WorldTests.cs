@@ -23,22 +23,9 @@ namespace GoLTests
             Location location = new Location(1, 2);
 
             world.SetLivingCellAt(location);
-            Cell lastCellAdded = world.LivingCells.Last();
+            bool cellIsAlive = world.IsCellAliveAt(location);
             
-            Assert.True(lastCellAdded.IsAlive);
-        }
-
-        [Fact]
-        public void SetLivingCellAt_GivenLocation_CreatesCellWithLocation()
-        {
-            World world = new World();
-            Location expected = new Location(2, 2);
-            
-            world.SetLivingCellAt(expected);
-            Cell lastCellAdded = world.LivingCells.Last();
-            Location actual = lastCellAdded.Location;
-            
-            Assert.Equal(expected, actual);
+            Assert.True(cellIsAlive);
         }
 
         [Fact]
