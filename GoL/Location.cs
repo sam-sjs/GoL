@@ -5,6 +5,9 @@ namespace GoL
 {
     public class Location
     {
+        private const int PositiveAdjustment = 1;
+        private const int NoAdjustment = 0;
+        private const int NegativeAdjustment = -1;
         public Location(int x, int y)
         {
             XPosition = x;
@@ -12,18 +15,19 @@ namespace GoL
         }
         public int XPosition { get; }
         public int YPosition { get; }
-
-        public List<Location> GetNeighbours(Location location)
+        
+        // TODO: Assess whether this is the best way to get surrounding locations.
+        public List<Location> GetNeighbouringLocations()
         {
             List<Location> neighbours = new List<Location>();
-            neighbours.Add(new Location(location.XPosition - 1, location.YPosition - 1));
-            neighbours.Add(new Location(location.XPosition - 0, location.YPosition - 1));
-            neighbours.Add(new Location(location.XPosition + 1, location.YPosition - 1));
-            neighbours.Add(new Location(location.XPosition - 1, location.YPosition - 0));
-            neighbours.Add(new Location(location.XPosition + 1, location.YPosition - 0));
-            neighbours.Add(new Location(location.XPosition - 1, location.YPosition + 1));
-            neighbours.Add(new Location(location.XPosition - 0, location.YPosition + 1));
-            neighbours.Add(new Location(location.XPosition + 1, location.YPosition + 1));
+            neighbours.Add(new Location(XPosition + NegativeAdjustment, YPosition + NegativeAdjustment));
+            neighbours.Add(new Location(XPosition + NoAdjustment, YPosition + NegativeAdjustment));
+            neighbours.Add(new Location(XPosition + PositiveAdjustment, YPosition + NegativeAdjustment));
+            neighbours.Add(new Location(XPosition + NegativeAdjustment, YPosition + NoAdjustment));
+            neighbours.Add(new Location(XPosition + PositiveAdjustment, YPosition + NoAdjustment));
+            neighbours.Add(new Location(XPosition + NegativeAdjustment, YPosition + PositiveAdjustment));
+            neighbours.Add(new Location(XPosition + NoAdjustment, YPosition + PositiveAdjustment));
+            neighbours.Add(new Location(XPosition + PositiveAdjustment, YPosition + PositiveAdjustment));
             return neighbours;
         }
 

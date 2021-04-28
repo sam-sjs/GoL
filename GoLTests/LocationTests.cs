@@ -26,7 +26,7 @@ namespace GoLTests
                 new Location(5, 6), new Location(6, 6)
             };
 
-            List<Location> actual = initialLocation.GetNeighbours(initialLocation);
+            List<Location> actual = initialLocation.GetNeighbouringLocations();
 
             Assert.Equal(expected, actual);
         }
