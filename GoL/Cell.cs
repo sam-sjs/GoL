@@ -7,6 +7,6 @@ namespace GoL
             Location = location;
         }
         public Location Location { get; }
-        public bool IsAlive { get; set; } = true;
+        public bool IsAlive { get; } = true;
     }
 }

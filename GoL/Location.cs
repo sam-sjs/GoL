@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GoL
 {
@@ -11,6 +12,20 @@ namespace GoL
         }
         public int XPosition { get; }
         public int YPosition { get; }
+
+        public List<Location> GetNeighbours(Location location)
+        {
+            List<Location> neighbours = new List<Location>();
+            neighbours.Add(new Location(location.XPosition - 1, location.YPosition - 1));
+            neighbours.Add(new Location(location.XPosition - 0, location.YPosition - 1));
+            neighbours.Add(new Location(location.XPosition + 1, location.YPosition - 1));
+            neighbours.Add(new Location(location.XPosition - 1, location.YPosition - 0));
+            neighbours.Add(new Location(location.XPosition + 1, location.YPosition - 0));
+            neighbours.Add(new Location(location.XPosition - 1, location.YPosition + 1));
+            neighbours.Add(new Location(location.XPosition - 0, location.YPosition + 1));
+            neighbours.Add(new Location(location.XPosition + 1, location.YPosition + 1));
+            return neighbours;
+        }
 
         protected bool Equals(Location other)
         {

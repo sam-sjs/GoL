@@ -19,7 +19,7 @@ namespace GoL
         public bool IsCellAliveAt(Location location)
         {
             Cell cellAtLocation = _livingCells.Find(cell => cell.Location == location);
-            return cellAtLocation is {IsAlive: true}; // is C# 7.0 pattern matching syntax ok, rider make me do it...
+            return cellAtLocation != null && cellAtLocation.IsAlive;
         }
     }
 }
