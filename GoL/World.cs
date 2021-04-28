@@ -15,5 +15,11 @@ namespace GoL
         {
             LivingCells.Add(new Cell(location));
         }
+
+        public bool IsCellAliveAt(Location location)
+        {
+            Cell cellAtLocation = LivingCells.Find(cell => cell.Location.Equals(location));
+            return cellAtLocation != null && cellAtLocation.IsAlive;
+        }
     }
 }
