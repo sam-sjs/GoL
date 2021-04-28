@@ -18,8 +18,8 @@ namespace GoL
 
         public bool IsCellAliveAt(Location location)
         {
-            Cell cellAtLocation = LivingCells.Find(cell => cell.Location.Equals(location));
-            return cellAtLocation != null && cellAtLocation.IsAlive;
+            Cell cellAtLocation = LivingCells.Find(cell => cell.Location == location);
+            return cellAtLocation is {IsAlive: true}; // is C# 7.0 pattern matching syntax ok, rider make me do it...
         }
     }
 }

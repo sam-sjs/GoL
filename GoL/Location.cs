@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace GoL
 {
@@ -29,6 +28,16 @@ namespace GoL
         public override int GetHashCode()
         {
             return HashCode.Combine(XPosition, YPosition);
+        }
+
+        public static bool operator ==(Location left, Location right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Location left, Location right)
+        {
+            return !Equals(left, right);
         }
     }
 }
