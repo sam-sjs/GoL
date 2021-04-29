@@ -18,7 +18,7 @@ namespace GoLTests
         [Fact]
         public void GetNeighbours_GivenLocation_ReturnsListOfSurroundingLocations()
         {
-            Location initialLocation = new Location(5, 5);
+            Location location = new Location(5, 5);
             List<Location> expected = new List<Location>
             {
                 new Location(4, 4), new Location(5, 4), new Location(6, 4),
@@ -26,7 +26,7 @@ namespace GoLTests
                 new Location(5, 6), new Location(6, 6)
             };
 
-            List<Location> actual = initialLocation.GetNeighbouringLocations();
+            List<Location> actual = location.GetNeighbouringLocations();
 
             Assert.Equal(expected, actual);
         }

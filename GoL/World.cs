@@ -19,6 +19,7 @@ namespace GoL
         public bool IsCellAliveAt(Location location)
         {
             Cell cellAtLocation = _livingCells.Find(cell => cell.Location == location);
+            // May not need null if full board is generated at some point.
             return cellAtLocation != null && cellAtLocation.IsAlive;
         }
     }
