@@ -5,22 +5,20 @@ namespace GoL
 {
     public class World
     {
-        private readonly List<Cell> _livingCells = new List<Cell>();
+        private readonly List<LivingCell> _livingCells = new List<LivingCell>();
         public bool IsWorldEmpty()
         {
             return _livingCells.Count == 0;
         }
 
-        public void SetLivingCellAt(Location location)
+        public void SetLivingCell(LivingCell livingCell)
         {
-            _livingCells.Add(new Cell(location));
+            _livingCells.Add(livingCell);
         }
 
-        public bool IsCellAliveAt(Location location)
+        public bool IsCellAlive(LivingCell livingCell)
         {
-            Cell cellAtLocation = _livingCells.Find(cell => cell.Location == location);
-            // May not need null if full board is generated at some point.
-            return cellAtLocation != null && cellAtLocation.IsAlive;
+            return _livingCells.Contains(livingCell);
         }
     }
 }

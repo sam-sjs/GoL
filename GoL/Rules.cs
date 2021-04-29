@@ -13,10 +13,10 @@ namespace GoL
         {
             _world = world;
         }
-        public bool IsCellGoingToComeToLifeAt(Location location)
+        public bool IsCellGoingToComeToLifeAt(LivingCell livingCell)
         {
-            int aliveNeighbours = GetAliveNeighboursCount(location);
-            if (_world.IsCellAliveAt(location))
+            int aliveNeighbours = GetAliveNeighboursCount(livingCell);
+            if (_world.IsCellAlive(livingCell))
             {
                 return DoesCellStayAlive(aliveNeighbours);
             }
@@ -24,11 +24,11 @@ namespace GoL
             return DoesCellComeToLife(aliveNeighbours);
         }
 
-        private int GetAliveNeighboursCount(Location location)
+        private int GetAliveNeighboursCount(LivingCell livingCell)
         {
-            List<Location> neighbours = location.GetNeighbouringLocations();
+            List<LivingCell> neighbours = livingCell.GetNeighbouringLocations();
 
-            return neighbours.Count(neighbour => _world.IsCellAliveAt(neighbour));
+            return neighbours.Count(neighbour => _world.IsCellAlive(neighbour));
         }
 
         private bool DoesCellStayAlive(int aliveNeighbours)

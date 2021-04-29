@@ -9,16 +9,16 @@ namespace GoLTests
         [Fact]
         private void IsCellGoingToComeToLifeAt_ShouldReturnTrueIfLocationWillContainLivingCell()
         {
-            Location aliveCell1 = new Location(1, 1);
-            Location aliveCell2 = new Location(1, 2);
-            Location locationToTest = new Location(2, 2);
+            LivingCell aliveCell1 = new LivingCell(1, 1);
+            LivingCell aliveCell2 = new LivingCell(1, 2);
+            LivingCell livingCellToTest = new LivingCell(2, 2);
             World world = new World();
-            world.SetLivingCellAt(aliveCell1);
-            world.SetLivingCellAt(aliveCell2);
-            world.SetLivingCellAt(locationToTest);
+            world.SetLivingCell(aliveCell1);
+            world.SetLivingCell(aliveCell2);
+            world.SetLivingCell(livingCellToTest);
             Rules rules = new Rules(world);
 
-            bool cellComesToLife = rules.IsCellGoingToComeToLifeAt(locationToTest);
+            bool cellComesToLife = rules.IsCellGoingToComeToLifeAt(livingCellToTest);
             
             Assert.True(cellComesToLife);
         }
@@ -26,12 +26,12 @@ namespace GoLTests
         [Fact]
         private void IsCellGoingToComeToLifeAt_ShouldReturnFalseIfLocationWillContainDeadCell()
         {
-            Location locationToTest = new Location(2, 2);
+            LivingCell livingCellToTest = new LivingCell(2, 2);
             World world = new World();
-            world.SetLivingCellAt(locationToTest);
+            world.SetLivingCell(livingCellToTest);
             Rules rules = new Rules(world);
 
-            bool cellComesToLife = rules.IsCellGoingToComeToLifeAt(locationToTest);
+            bool cellComesToLife = rules.IsCellGoingToComeToLifeAt(livingCellToTest);
             
             Assert.False(cellComesToLife);
         }
