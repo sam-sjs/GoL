@@ -16,35 +16,35 @@ namespace GoLTests
         }
 
         [Fact]
-        public void SetLivingCellAt_ShouldAddALivingCellToWorld()
+        public void SetLivingCell_ShouldAddALivingCellToWorld()
         {
             World world = new World();
-            LivingCell livingCell = new LivingCell(1, 2);
+            Cell cell = new Cell(1, 2);
 
-            world.SetLivingCell(livingCell);
-            bool cellIsAlive = world.IsCellAlive(livingCell);
+            world.SetLivingCell(cell);
+            bool cellIsAlive = world.IsCellAlive(cell);
             
             Assert.True(cellIsAlive);
         }
 
         [Fact]
-        public void IsCellAliveAt_GivenLocation_ReturnsTrueWhenCellAtLocationIsAlive()
+        public void IsCellAlive_GivenCell_ReturnsTrueWhenCellAtIsAlive()
         {
             World world = new World();
-            LivingCell livingCell = new LivingCell(3, 3);
-            world.SetLivingCell(livingCell);
+            Cell cell = new Cell(3, 3);
+            world.SetLivingCell(cell);
 
-            bool cellIsAlive = world.IsCellAlive(livingCell);
+            bool cellIsAlive = world.IsCellAlive(cell);
             
             Assert.True(cellIsAlive);
         }
 
         [Fact]
-        public void NewWorld_ShouldNoLongerBeEmptyAfterAddingACell()
+        public void NewWorld_ShouldNoLongerBeEmptyAfterAddingALivingCell()
         {
             World world = new World();
-            LivingCell livingCell = new LivingCell(1, 1);
-            world.SetLivingCell(livingCell);
+            Cell cell = new Cell(1, 1);
+            world.SetLivingCell(cell);
             
             bool worldIsEmpty = world.IsWorldEmpty();
             
