@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GoL
 {
@@ -25,14 +26,9 @@ namespace GoL
 
         private int GetAliveNeighboursCount(Location location)
         {
-            int aliveNeighbours = 0;
             List<Location> neighbours = location.GetNeighbouringLocations();
-            foreach (Location neighbour in neighbours)
-            {
-                if (_world.IsCellAliveAt(neighbour)) aliveNeighbours++;
-            }
 
-            return aliveNeighbours;
+            return neighbours.Count(neighbour => _world.IsCellAliveAt(neighbour));
         }
 
         private bool DoesCellStayAlive(int aliveNeighbours)
