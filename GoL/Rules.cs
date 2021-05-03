@@ -9,25 +9,21 @@ namespace GoL
         private const int CellSurvivesUpperCount = 3;
         private const int CellComesToLifeCount = 3;
         private readonly World _world;
+
         public Rules(World world)
         {
             _world = world;
         }
-        public bool IsCellGoingToComeToLifeAt(Cell cell)
+
+        public bool IsCellAliveInNextGeneration(Cell cell)
         {
             int aliveNeighbours = GetAliveNeighboursCount(cell);
-            if (_world.IsCellAlive(cell))
-            {
-                return DoesCellStayAlive(aliveNeighbours);
-            }
-
-            return DoesCellComeToLife(aliveNeighbours);
+            return _world.IsCellAlive(cell) ? DoesCellStayAlive(aliveNeighbours) : DoesCellComeToLife(aliveNeighbours);
         }
 
         private int GetAliveNeighboursCount(Cell cell)
         {
             List<Cell> neighbours = cell.GetNeighbouringCells();
-
             return neighbours.Count(neighbour => _world.IsCellAlive(neighbour));
         }
 

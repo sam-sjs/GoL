@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 
 namespace GoL
@@ -6,6 +5,7 @@ namespace GoL
     public class World
     {
         private readonly List<Cell> _livingCells = new List<Cell>();
+
         public bool IsWorldEmpty()
         {
             return _livingCells.Count == 0;

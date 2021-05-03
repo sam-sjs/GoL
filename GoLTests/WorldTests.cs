@@ -9,9 +9,9 @@ namespace GoLTests
         public void NewWorld_ShouldBeEmpty()
         {
             World world = new World();
-            
+
             bool worldIsEmpty = world.IsWorldEmpty();
-            
+
             Assert.True(worldIsEmpty);
         }
 
@@ -19,11 +19,11 @@ namespace GoLTests
         public void SetLivingCell_ShouldAddALivingCellToWorld()
         {
             World world = new World();
-            Cell cell = new Cell(1, 2);
+            Cell cell = new Cell(1, 2, true);
 
             world.SetLivingCell(cell);
             bool cellIsAlive = world.IsCellAlive(cell);
-            
+
             Assert.True(cellIsAlive);
         }
 
@@ -31,11 +31,11 @@ namespace GoLTests
         public void IsCellAlive_GivenCell_ReturnsTrueWhenCellAtIsAlive()
         {
             World world = new World();
-            Cell cell = new Cell(3, 3);
+            Cell cell = new Cell(3, 3, true);
             world.SetLivingCell(cell);
 
             bool cellIsAlive = world.IsCellAlive(cell);
-            
+
             Assert.True(cellIsAlive);
         }
 
@@ -43,11 +43,11 @@ namespace GoLTests
         public void NewWorld_ShouldNoLongerBeEmptyAfterAddingALivingCell()
         {
             World world = new World();
-            Cell cell = new Cell(1, 1);
+            Cell cell = new Cell(1, 1, true);
             world.SetLivingCell(cell);
-            
+
             bool worldIsEmpty = world.IsWorldEmpty();
-            
+
             Assert.False(worldIsEmpty);
         }
     }

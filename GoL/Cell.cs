@@ -8,27 +8,31 @@ namespace GoL
         private const int PositiveAdjustment = 1;
         private const int NoAdjustment = 0;
         private const int NegativeAdjustment = -1;
-        public Cell(int x, int y)
+
+        public Cell(int x, int y, bool isAlive)
         {
             XPosition = x;
             YPosition = y;
+            IsAlive = isAlive;
         }
+
         public int XPosition { get; }
         public int YPosition { get; }
-        
+        public bool IsAlive { get; }
+
         // TODO: Assess whether this is the best way to get surrounding locations.
-        public List<Cell> GetNeighbouringCells()
+        public List<Cell> GetNeighbouringCells() // IS THIS IS BAD COMMAND QUERY SEPARATION?!
         {
             List<Cell> neighbours = new List<Cell>
             {
-                new Cell(XPosition + NegativeAdjustment, YPosition + NegativeAdjustment),
-                new Cell(XPosition + NoAdjustment, YPosition + NegativeAdjustment),
-                new Cell(XPosition + PositiveAdjustment, YPosition + NegativeAdjustment),
-                new Cell(XPosition + NegativeAdjustment, YPosition + NoAdjustment),
-                new Cell(XPosition + PositiveAdjustment, YPosition + NoAdjustment),
-                new Cell(XPosition + NegativeAdjustment, YPosition + PositiveAdjustment),
-                new Cell(XPosition + NoAdjustment, YPosition + PositiveAdjustment),
-                new Cell(XPosition + PositiveAdjustment, YPosition + PositiveAdjustment)
+                new Cell(XPosition + NegativeAdjustment, YPosition + NegativeAdjustment, true),
+                new Cell(XPosition + NoAdjustment, YPosition + NegativeAdjustment, true),
+                new Cell(XPosition + PositiveAdjustment, YPosition + NegativeAdjustment, true),
+                new Cell(XPosition + NegativeAdjustment, YPosition + NoAdjustment, true),
+                new Cell(XPosition + PositiveAdjustment, YPosition + NoAdjustment, true),
+                new Cell(XPosition + NegativeAdjustment, YPosition + PositiveAdjustment, true),
+                new Cell(XPosition + NoAdjustment, YPosition + PositiveAdjustment, true),
+                new Cell(XPosition + PositiveAdjustment, YPosition + PositiveAdjustment, true)
             };
             return neighbours;
         }
