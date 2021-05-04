@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GoL
 {
@@ -15,7 +16,11 @@ namespace GoL
         {
             CurrentGeneration = newGeneration;
         }
-        
-        // public int GetAliveNeighboursCount()
+
+        public int GetAliveNeighboursCount(Cell cellToTest)
+        {
+            List<Location> neighbours = cellToTest.Location.GetNeighbouringLocations();
+            return CurrentGeneration.Count(cell => cell.IsAlive && neighbours.Contains(cell.Location));
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace GoL
         }
 
         public Location Location { get; }
-        public bool IsAlive { get; } // Should this be in the equality operation?
+        public bool IsAlive { get; }
 
         protected bool Equals(Cell other)
         {

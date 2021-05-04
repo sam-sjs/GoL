@@ -1,3 +1,4 @@
+
 using GoL;
 using Xunit;
 
@@ -5,35 +6,31 @@ namespace GoLTests
 {
     public class RulesTests
     {
-        // Can maybe mock the fake world
-        // [Fact]
-        // private void IsCellAliveInNextGeneration_ShouldReturnTrueIfCellWillBeAliveInNextGeneration()
-        // {
-        //     Cell livingCell1 = new Cell(1, 1, true);
-        //     Cell livingCell2 = new Cell(1, 2, true);
-        //     Cell cellToTest = new Cell(2, 2, true);
-        //     World world = new World();
-        //     world.SetLivingCell(livingCell1);
-        //     world.SetLivingCell(livingCell2);
-        //     world.SetLivingCell(cellToTest);
-        //     Rules rules = new Rules(world);
-        //
-        //     bool cellComesToLife = rules.IsCellAliveInNextGeneration(cellToTest);
-        //
-        //     Assert.True(cellComesToLife);
-        // }
+        [Theory]
+        [InlineData(2, true)]
+        [InlineData(3, true)]
+        [InlineData(1, false)]
+        [InlineData(5, false)]
+        public void DoesCellStayAlive_ReturnsExpected(int livingNeighbours, bool expected)
+        {
+            Rules rules = new Rules();
 
-        // [Fact]
-        // private void IsCellAliveInNextGeneration_ShouldReturnFalseIfCellWillBeDeadInNextGeneration()
-        // {
-        //     Cell cellToTest = new Cell(2, 2, true);
-        //     World world = new World();
-        //     world.SetLivingCell(cellToTest);
-        //     Rules rules = new Rules(world);
-        //
-        //     bool cellComesToLife = rules.IsCellAliveInNextGeneration(cellToTest);
-        //     
-        //     Assert.False(cellComesToLife);
-        // }
+            bool actual = rules.DoesCellStayAlive(livingNeighbours);
+            
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(3, true)]
+        [InlineData(2, false)]
+        [InlineData(6, false)]
+        public void DoesCellComeToLife_ReturnsExpected(int livingNeighbours, bool expected)
+        {
+            Rules rules = new Rules();
+
+            bool actual = rules.DoesCellComeToLife(livingNeighbours);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

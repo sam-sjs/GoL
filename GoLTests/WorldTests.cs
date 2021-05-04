@@ -48,7 +48,20 @@ namespace GoLTests
         [Fact]
         public void GetAliveNeighboursCount_ReturnsIntOfNumberOfSurroundingCellsInAliveState()
         {
+            World world = new World();
+            Location location1 = new Location(1, 3);
+            Location location2 = new Location(3, 1);
+            Location location3 = new Location(2, 2);
+            Cell livingCell1 = new Cell(location1, true);
+            Cell livingCell2 = new Cell(location2, true);
+            Cell livingCell3 = new Cell(location3, true);
+            List<Cell> currentGeneration = new List<Cell> {livingCell1, livingCell2, livingCell3};
+            int expected = 2;
+
+            world.UpdateCurrentGeneration(currentGeneration);
+            int actual = world.GetAliveNeighboursCount(livingCell3);
             
+            Assert.Equal(expected, actual);
         }
     }
 }
