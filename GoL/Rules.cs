@@ -13,11 +13,11 @@ namespace GoL
             _world = world;
         }
 
-        public bool IsCellAliveInNextGeneration(Cell cell)
-        {
-            int aliveNeighbours = cell.GetAliveNeighboursCount();
-            return _world.IsCellAlive(cell) ? DoesCellStayAlive(aliveNeighbours) : DoesCellComeToLife(aliveNeighbours);
-        }
+        // public bool IsCellAliveInNextGeneration(Cell cell)
+        // {
+        //     int aliveNeighbours = cell.GetAliveNeighboursCount();
+        //     return _world.IsCellAlive(cell) ? DoesCellStayAlive(aliveNeighbours) : DoesCellComeToLife(aliveNeighbours);
+        // }
 
         private bool DoesCellStayAlive(int aliveNeighbours)
         {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GoL;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace GoLTests
     public class WorldTests
     {
         [Fact]
-        public void NewWorld_ShouldBeEmpty()
+        public void ANewWorld_ShouldBeEmpty()
         {
             World world = new World();
 
@@ -16,39 +17,38 @@ namespace GoLTests
         }
 
         [Fact]
-        public void SetLivingCell_ShouldAddALivingCellToWorld()
+        public void UpdateCurrentGeneration_GivenList_ShouldReplaceTheCurrentGenerationWithTheNewList()
         {
             World world = new World();
-            Cell cell = new Cell(1, 2, true);
+            Location location1 = new Location(2, 4);
+            Location location2 = new Location(1, 2);
+            List<Cell> generationUpdate = new List<Cell> {new(location1, true), new(location2, true)};
 
-            world.SetLivingCell(cell);
-            bool cellIsAlive = world.IsCellAlive(cell);
-
-            Assert.True(cellIsAlive);
+            List<Cell> currentGeneration = world.CurrentGeneration;
+            world.UpdateCurrentGeneration(generationUpdate);
+            List<Cell> newGeneration = world.CurrentGeneration;
+            
+            Assert.NotEqual(currentGeneration, newGeneration);
         }
 
         [Fact]
-        public void IsCellAlive_GivenCell_ReturnsTrueWhenCellAtIsAlive()
+        public void ANewWorld_ShouldNoLongerBeEmptyAfterAddingALivingCell()
         {
             World world = new World();
-            Cell cell = new Cell(3, 3, true);
-            world.SetLivingCell(cell);
-
-            bool cellIsAlive = world.IsCellAlive(cell);
-
-            Assert.True(cellIsAlive);
-        }
-
-        [Fact]
-        public void NewWorld_ShouldNoLongerBeEmptyAfterAddingALivingCell()
-        {
-            World world = new World();
-            Cell cell = new Cell(1, 1, true);
-            world.SetLivingCell(cell);
+            Location location = new Location(2, 2);
+            List<Cell> initialGeneration = new List<Cell> {new Cell(location, true)};
+            world.UpdateCurrentGeneration(initialGeneration);
 
             bool worldIsEmpty = world.IsWorldEmpty();
 
             Assert.False(worldIsEmpty);
+        }
+
+        // Potential to mock some worlds to clean up test code
+        [Fact]
+        public void GetAliveNeighboursCount_ReturnsIntOfNumberOfSurroundingCellsInAliveState()
+        {
+            
         }
     }
 }

@@ -4,21 +4,18 @@ namespace GoL
 {
     public class World
     {
-        private readonly List<Cell> _livingCells = new List<Cell>();
+        public List<Cell> CurrentGeneration { get; private set; } = new List<Cell>();
 
         public bool IsWorldEmpty()
         {
-            return _livingCells.Count == 0;
+            return CurrentGeneration.Count == 0;
         }
 
-        public void SetLivingCell(Cell cell)
+        public void UpdateCurrentGeneration(List<Cell> newGeneration)
         {
-            _livingCells.Add(cell);
+            CurrentGeneration = newGeneration;
         }
-
-        public bool IsCellAlive(Cell cell)
-        {
-            return _livingCells.Contains(cell);
-        }
+        
+        // public int GetAliveNeighboursCount()
     }
 }
