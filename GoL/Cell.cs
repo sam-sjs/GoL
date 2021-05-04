@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GoL
 {
@@ -18,10 +19,15 @@ namespace GoL
 
         public int XPosition { get; }
         public int YPosition { get; }
-        public bool IsAlive { get; }
+        public bool IsAlive { get; } // Should this be in the equality operation?
 
-        // TODO: Assess whether this is the best way to get surrounding locations.
-        public List<Cell> GetNeighbouringCells() // IS THIS IS BAD COMMAND QUERY SEPARATION?!
+        public int GetAliveNeighboursCount()
+        {
+            List<Cell> neighbours = GetNeighbouringCells();
+            return neighbours.Count(neighbour => neighbour.IsAlive);
+        }
+        
+        private List<Cell> GetNeighbouringCells()
         {
             List<Cell> neighbours = new List<Cell>
             {

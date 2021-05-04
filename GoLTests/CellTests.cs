@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GoL;
 using Xunit;
 
@@ -16,17 +15,18 @@ namespace GoLTests
         }
 
         [Fact]
-        public void GetNeighbouringCells_GivenCell_ReturnsListOfSurroundingCells()
+        public void GetAliveNeighboursCount_ShouldReturnIntOfSurroundingLivingNeighbours()
         {
-            Cell cell = new Cell(5, 5, true);
-            List<Cell> expected = new List<Cell>
-            {
-                new Cell(4, 4, true), new Cell(5, 4, true), new Cell(6, 4, true),
-                new Cell(4, 5, true), new Cell(6, 5, true), new Cell(4, 6, true),
-                new Cell(5, 6, true), new Cell(6, 6, true)
-            };
+            Cell livingCell1 = new Cell(1, 1, true);
+            Cell livingCell2 = new Cell(1, 2, true);
+            Cell cellToTest = new Cell(2, 2, true);
+            World world = new World();
+            world.SetLivingCell(livingCell1);
+            world.SetLivingCell(livingCell2);
+            world.SetLivingCell(cellToTest);
+            int expected = 2;
 
-            List<Cell> actual = cell.GetNeighbouringCells();
+            int actual = cellToTest.GetAliveNeighboursCount();
 
             Assert.Equal(expected, actual);
         }

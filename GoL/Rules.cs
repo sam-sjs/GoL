@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GoL
 {
@@ -17,14 +15,8 @@ namespace GoL
 
         public bool IsCellAliveInNextGeneration(Cell cell)
         {
-            int aliveNeighbours = GetAliveNeighboursCount(cell);
+            int aliveNeighbours = cell.GetAliveNeighboursCount();
             return _world.IsCellAlive(cell) ? DoesCellStayAlive(aliveNeighbours) : DoesCellComeToLife(aliveNeighbours);
-        }
-
-        private int GetAliveNeighboursCount(Cell cell)
-        {
-            List<Cell> neighbours = cell.GetNeighbouringCells();
-            return neighbours.Count(neighbour => _world.IsCellAlive(neighbour));
         }
 
         private bool DoesCellStayAlive(int aliveNeighbours)
