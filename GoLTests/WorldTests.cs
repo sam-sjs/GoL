@@ -55,7 +55,7 @@ namespace GoLTests
             Cell livingCell1 = new Cell(location1, true);
             Cell livingCell2 = new Cell(location2, true);
             Cell livingCell3 = new Cell(location3, true);
-            List<Cell> currentGeneration = new List<Cell> {livingCell1, livingCell2, livingCell3};
+            List<Cell> currentGeneration = new List<Cell> { livingCell1, livingCell2, livingCell3 };
             int expected = 2;
 
             world.UpdateCurrentGeneration(currentGeneration);
