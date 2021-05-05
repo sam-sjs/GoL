@@ -12,7 +12,7 @@ namespace GoL
         }
 
         public Location Location { get; }
-        public bool IsAlive { get; }
+        public bool IsAlive { get; set; }
 
         protected bool Equals(Cell other)
         {
