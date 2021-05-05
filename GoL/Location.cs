@@ -18,7 +18,7 @@ namespace GoL
             _yPosition = y;
         }
         
-        public List<Location> GetNeighbouringLocations() // IS THIS IS BAD COMMAND QUERY SEPARATION?!  Is it really changing state though?  Maybe fine
+        public List<Location> GetNeighbouringLocations()  
         {
             List<Location> neighbours = new List<Location>
             {
