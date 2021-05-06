@@ -1,26 +1,31 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GoL
 {
     public class World
     {
+        private readonly GameOfLife _game;
+
+        public World(GameOfLife game)
+        {
+            _game = game;
+        }
         public List<Cell> CurrentGeneration { get; set; } = new List<Cell>();
 
         public bool IsWorldEmpty()
         {
             return CurrentGeneration.Count == 0;
         }
-
-        public void UpdateCurrentGeneration(List<Cell> newGeneration) // Maybe drop this method just use public prop
+        
+        public void SetInitialWorldState(List<Cell> initialState)
         {
-            CurrentGeneration = newGeneration;
+            CurrentGeneration = initialState;
         }
-
-        public int GetAliveNeighboursCount(Cell cellToTest)
+        
+        public void AdvanceToNextGeneration()
         {
-            List<Location> neighbours = cellToTest.Location.GetNeighbouringLocations();
-            return CurrentGeneration.Count(cell => cell.IsAlive && neighbours.Contains(cell.Location));
+            _game.BuildNewGeneration(CurrentGeneration);
+            CurrentGeneration = _game.GetNewGeneration();
         }
     }
 }

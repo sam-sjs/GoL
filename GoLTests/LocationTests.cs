@@ -16,7 +16,7 @@ namespace GoLTests
         }
         
         [Fact]
-        public void GetNeighbouringLocations_GivenLocation_ReturnsListOfSurroundingLocations()
+        public void GetNeighbouringLocations_ReturnsListOfSurroundingLocations()
         {
             Location location = new Location(5, 5);
             List<Location> expected = new List<Location>

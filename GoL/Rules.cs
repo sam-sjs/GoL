@@ -7,21 +7,15 @@ namespace GoL
         private const int CellSurvivesUpperCount = 3;
         private const int CellComesToLifeCount = 3;
 
-        // public bool IsCellAliveInNextGeneration(Cell cell)
-        // {
-        //     int aliveNeighbours = cell.GetAliveNeighboursCount();
-        //     return _world.IsCellAlive(cell) ? DoesCellStayAlive(aliveNeighbours) : DoesCellComeToLife(aliveNeighbours);
-        // }
-
-        public bool DoesCellStayAlive(int aliveNeighbours)
+        public bool DoesCellStayAlive(Cell cell)
         {
-            return aliveNeighbours == CellSurvivesLowerCount ||
-                   aliveNeighbours == CellSurvivesUpperCount;
+            return cell.GetLivingNeighboursCount() == CellSurvivesLowerCount ||
+                   cell.GetLivingNeighboursCount() == CellSurvivesUpperCount;
         }
 
-        public bool DoesCellComeToLife(int aliveNeighbours)
+        public bool DoesCellComeToLife(Cell cell)
         {
-            return aliveNeighbours == CellComesToLifeCount;
+            return cell.GetLivingNeighboursCount() == CellComesToLifeCount;
         }
     }
 }

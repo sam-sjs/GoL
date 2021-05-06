@@ -1,18 +1,31 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GoL
 {
     public class Cell
     {
+        private List<Cell> _neighbours = new List<Cell>();
 
         public Cell(Location location, bool isAlive)
         {
             Location = location;
-            IsAlive = isAlive;
+            IsAlive = isAlive; // Consider if this needs to be set in constructor
         }
 
         public Location Location { get; }
         public bool IsAlive { get; set; }
+
+        public void SetNeighbours(List<Cell> generationOfCells) // Parameter name not great.
+        {
+            List<Location> neighbours = Location.GetNeighbouringLocations(); // "neighbours" might be confusing
+            _neighbours = generationOfCells.Where(cell => neighbours.Contains(cell.Location)).ToList();
+        }
+
+        public int GetLivingNeighboursCount()
+        {
+            return _neighbours.Count(cell => cell.IsAlive);
+        }
 
         protected bool Equals(Cell other)
         {
@@ -29,17 +42,7 @@ namespace GoL
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Location, IsAlive);
-        }
-
-        public static bool operator ==(Cell left, Cell right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Cell left, Cell right)
-        {
-            return !Equals(left, right);
+            return (Location != null ? Location.GetHashCode() : 0);
         }
     }
 }

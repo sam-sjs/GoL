@@ -6,62 +6,78 @@ namespace GoLTests
 {
     public class WorldTests
     {
+        private readonly World _world;
+        public WorldTests()
+        {
+            Rules rules = new Rules();
+            GameOfLife game = new GameOfLife(rules); 
+            _world = new World(game);
+        }
         [Fact]
         public void ANewWorld_ShouldBeEmpty()
         {
-            World world = new World();
-
-            bool worldIsEmpty = world.IsWorldEmpty();
+            bool worldIsEmpty = _world.IsWorldEmpty();
 
             Assert.True(worldIsEmpty);
         }
 
         [Fact]
-        public void UpdateCurrentGeneration_GivenList_ShouldReplaceTheCurrentGenerationWithTheNewList()
+        public void ANewWorld_ShouldNoLongerBeEmptyAfterAddingACell()
         {
-            World world = new World();
-            Location location1 = new Location(2, 4);
-            Location location2 = new Location(1, 2);
-            List<Cell> generationUpdate = new List<Cell> {new(location1, true), new(location2, true)};
-
-            List<Cell> currentGeneration = world.CurrentGeneration;
-            world.UpdateCurrentGeneration(generationUpdate);
-            List<Cell> newGeneration = world.CurrentGeneration;
-            
-            Assert.NotEqual(currentGeneration, newGeneration);
-        }
-
-        [Fact]
-        public void ANewWorld_ShouldNoLongerBeEmptyAfterAddingALivingCell()
-        {
-            World world = new World();
             Location location = new Location(2, 2);
             List<Cell> initialGeneration = new List<Cell> {new Cell(location, true)};
-            world.UpdateCurrentGeneration(initialGeneration);
+            _world.SetInitialWorldState(initialGeneration);
 
-            bool worldIsEmpty = world.IsWorldEmpty();
+            bool worldIsEmpty = _world.IsWorldEmpty();
 
             Assert.False(worldIsEmpty);
         }
-
-        // Potential to mock some worlds to clean up test code
+        
         [Fact]
-        public void GetAliveNeighboursCount_ReturnsIntOfNumberOfSurroundingCellsInAliveState()
+        public void SetInitialWorldState_GivenAListOfCells_ShouldUpdatedTheCurrentWorld()
         {
-            World world = new World();
-            Location location1 = new Location(1, 3);
-            Location location2 = new Location(3, 1);
-            Location location3 = new Location(2, 2);
-            Cell livingCell1 = new Cell(location1, true);
-            Cell livingCell2 = new Cell(location2, true);
-            Cell livingCell3 = new Cell(location3, true);
-            List<Cell> currentGeneration = new List<Cell> { livingCell1, livingCell2, livingCell3 };
-            int expected = 2;
+            Location location1 = new Location(2, 2);
+            Location location2 = new Location(4, 5);
+            Location location3 = new Location(1, 2);
+            List<Cell> initialState = new List<Cell>
+            {
+                new Cell(location1, true), new Cell(location2, false), new Cell(location3, true)
+            };
 
-            world.UpdateCurrentGeneration(currentGeneration);
-            int actual = world.GetAliveNeighboursCount(livingCell3);
+            _world.SetInitialWorldState(initialState);
             
-            Assert.Equal(expected, actual);
+            Assert.Equal(initialState, _world.CurrentGeneration);
+        }
+        
+        [Fact]
+        public void AdvanceToNextGeneration_ShouldUpdateTheCurrentWorldToTheNewWorld()
+        {
+            Location location1 = new Location(1, 1);
+            Location location2 = new Location(1, 2);
+            Location location3 = new Location(1, 3);
+            Location location4 = new Location(2, 1);
+            Location location5 = new Location(2, 2);
+            Location location6 = new Location(2, 3);
+            Location location7 = new Location(3, 1);
+            Location location8 = new Location(3, 2);
+            Location location9 = new Location(3, 3);
+            List<Cell> initialState = new List<Cell>
+            {
+                new Cell(location1, true), new Cell(location2, true), new Cell(location3, false),
+                new Cell(location4, false), new Cell(location5, true), new Cell(location6, false),
+                new Cell(location7, false), new Cell(location8, false), new Cell(location9, false)
+            };
+            List<Cell> expected = new List<Cell>
+            {
+                new Cell(location1, true), new Cell(location2, true), new Cell(location3, false),
+                new Cell(location4, true), new Cell(location5, true), new Cell(location6, false),
+                new Cell(location7, false), new Cell(location8, false), new Cell(location9, false)
+            };
+            _world.SetInitialWorldState(initialState);
+
+            _world.AdvanceToNextGeneration();
+
+            Assert.Equal(expected, _world.CurrentGeneration);
         }
     }
 }
