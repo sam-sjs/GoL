@@ -10,8 +10,8 @@ namespace GoLTests
         public WorldTests()
         {
             Rules rules = new Rules();
-            GameOfLife game = new GameOfLife(rules); 
-            _world = new World(game);
+            Generation generation = new Generation(rules); 
+            _world = new World(generation);
         }
         [Fact]
         public void ANewWorld_ShouldBeEmpty()

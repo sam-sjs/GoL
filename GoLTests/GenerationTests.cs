@@ -4,7 +4,7 @@ using Xunit;
 
 namespace GoLTests
 {
-    public class GameOfLifeTests
+    public class GenerationTests
     {
     }
 }

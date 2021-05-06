@@ -4,11 +4,11 @@ namespace GoL
 {
     public class World
     {
-        private readonly GameOfLife _game;
+        private readonly Generation _generation;
 
-        public World(GameOfLife game)
+        public World(Generation generation)
         {
-            _game = game;
+            _generation = generation;
         }
         public List<Cell> CurrentGeneration { get; set; } = new List<Cell>();
 
@@ -24,8 +24,8 @@ namespace GoL
         
         public void AdvanceToNextGeneration()
         {
-            _game.BuildNewGeneration(CurrentGeneration);
-            CurrentGeneration = _game.GetNewGeneration();
+            _generation.BuildNewGeneration(CurrentGeneration);
+            CurrentGeneration = _generation.GetNewGeneration();
         }
     }
 }

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace GoL
 {
-    public class GameOfLife
+    public class Generation
     {
         private readonly Rules _rules;
         private readonly List<Cell> _nextGeneration = new List<Cell>();
 
-        public GameOfLife(Rules rules)
+        public Generation(Rules rules)
         {
             _rules = rules;
         }
