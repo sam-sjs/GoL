@@ -13,12 +13,19 @@ namespace GoLTests
             Generation generation = new Generation(rules); 
             _world = new World(generation);
         }
+        
         [Fact]
         public void ANewWorld_ShouldBeEmpty()
         {
             bool worldIsEmpty = _world.IsWorldEmpty();
 
             Assert.True(worldIsEmpty);
+        }
+
+        [Fact]
+        public void BuildWorld_ReturnsNull()
+        {
+            Assert.Null(_world.BuildWorld());
         }
 
         [Fact]
@@ -48,6 +55,8 @@ namespace GoLTests
             
             Assert.Equal(initialState, _world.CurrentGeneration);
         }
+        
+        
         
         [Fact]
         public void AdvanceToNextGeneration_ShouldUpdateTheCurrentWorldToTheNewWorld()

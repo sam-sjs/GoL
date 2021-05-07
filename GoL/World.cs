@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GoL
@@ -10,11 +11,16 @@ namespace GoL
         {
             _generation = generation;
         }
-        public List<Cell> CurrentGeneration { get; set; } = new List<Cell>();
+        public List<Cell> CurrentGeneration { get; private set; } = new List<Cell>();
 
         public bool IsWorldEmpty()
         {
             return CurrentGeneration.Count == 0;
+        }
+
+        public Location BuildWorld()
+        {
+            return null;
         }
         
         public void SetInitialWorldState(List<Cell> initialState)

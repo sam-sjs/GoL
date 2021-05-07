@@ -33,6 +33,7 @@ namespace GoLTests
         public void DoesCellStayAlive_ReturnsExpected(List<Cell> neighbours, bool expected)
         {
             _cellToTest.SetNeighbours(neighbours);
+            
             bool actual = _rules.DoesCellStayAlive(_cellToTest);
         
             Assert.Equal(expected, actual);
@@ -54,6 +55,7 @@ namespace GoLTests
         public void DoesCellComeToLife_ReturnsExpected(List<Cell> neighbours, bool expected)
         {
             _cellToTest.SetNeighbours(neighbours);
+            
             bool actual = _rules.DoesCellComeToLife(_cellToTest);
         
             Assert.Equal(expected, actual);
