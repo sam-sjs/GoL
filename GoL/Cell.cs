@@ -16,12 +16,6 @@ namespace GoL
         public Location Location { get; }
         public bool IsAlive { get; set; }
 
-        public void SetNeighbours(List<Cell> generationOfCells) // Parameter name not great.
-        {
-            List<Location> neighbours = Location.GetNeighbouringLocations(); // "neighbours" might be confusing
-            _neighbours = generationOfCells.Where(cell => neighbours.Contains(cell.Location)).ToList();
-        }
-
         public int GetLivingNeighboursCount()
         {
             return _neighbours.Count(cell => cell.IsAlive);

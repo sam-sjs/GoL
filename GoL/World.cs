@@ -18,9 +18,11 @@ namespace GoL
             return CurrentGeneration.Count == 0;
         }
 
-        public Location BuildWorld()
+        public int[,] BuildWorld(int rows, int columns)
         {
-            return null;
+            int[,] newWorld = new int[rows, columns];
+
+            return newWorld;
         }
         
         public void SetInitialWorldState(List<Cell> initialState)

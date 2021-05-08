@@ -16,7 +16,6 @@ namespace GoL
         {
             foreach (Cell cell in currentGeneration)
             {
-                cell.SetNeighbours(currentGeneration); // Is this the best place to be setting cells neighbours?
                 cell.IsAlive = IsCellAliveInNextGeneration(cell); 
                 _nextGeneration.Add(cell);
             }
