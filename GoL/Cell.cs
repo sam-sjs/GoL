@@ -17,24 +17,23 @@ namespace GoL
         {
             return 0;
         }
-        
-        protected bool Equals(Cell other)
-        {
-            return IsAlive == other.IsAlive;
-            
-        }
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Cell) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return IsAlive.GetHashCode();
-        }
+        // protected bool Equals(Cell other)
+        // {
+        //     return Equals(Neighbours, other.Neighbours);
+        // }
+        //
+        // public override bool Equals(object obj)
+        // {
+        //     if (ReferenceEquals(null, obj)) return false;
+        //     if (ReferenceEquals(this, obj)) return true;
+        //     if (obj.GetType() != this.GetType()) return false;
+        //     return Equals((Cell) obj);
+        // }
+        //
+        // public override int GetHashCode()
+        // {
+        //     return (Neighbours != null ? Neighbours.GetHashCode() : 0);
+        // }
     }
 }

@@ -27,28 +27,40 @@ namespace GoLTests
         {
             int rows = 3;
             int columns = 3;
-            Cell[,] expected = new Cell[3, 3]
-            {
-                { new Cell(false), new Cell(false), new Cell(false) },
-                { new Cell(false), new Cell(false), new Cell(false) },
-                { new Cell(false), new Cell(false), new Cell(false) }
-            };
 
-            Cell[,] actual = _world.BuildWorld(rows, columns);
+            Cell[,] newWorld = _world.BuildWorld(columns, rows);
             
-            Assert.Equal(expected, actual);
+            Assert.NotEmpty(newWorld);
         }
 
         [Fact]
-        public void BuildWorld_ShouldAssociateEachCellWith8Neighbours() // Can check correct positioning in another test by testing cell positions in the "world" grid to the list of neighbours.
+        public void BuildWorld_ShouldAssociateEachCellWith8Neighbours()
         {
-            int rows = 5;
             int columns = 5;
+            int rows = 5;
             int expected = 8;
 
-            Cell[,] cells = _world.BuildWorld(rows, columns);
+            Cell[,] cells = _world.BuildWorld(columns, rows);
             
             Assert.Equal(expected, cells[2, 2].Neighbours.Count);
+        }
+
+        [Fact]
+        public void BuildWorld_ShouldAssociateCellWithCorrectNeighbours()
+        {
+            int columns = 5;
+            int rows = 5;
+
+            Cell[,] worldToTest = _world.BuildWorld(columns, rows);
+            Cell cellToTest = worldToTest[2, 2];
+            List<Cell> expected = new List<Cell>
+            {
+                worldToTest[1, 1], worldToTest[2, 1], worldToTest[3, 1],
+                worldToTest[1, 2], worldToTest[3, 2],
+                worldToTest[1, 3], worldToTest[2, 3], worldToTest[3, 3]
+            };
+            
+            Assert.Equal(expected, cellToTest.Neighbours);
         }
 
         [Fact]

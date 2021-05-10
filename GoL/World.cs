@@ -18,9 +18,9 @@ namespace GoL
             return CurrentGeneration.Count == 0;
         }
 
-        public Cell[,] BuildWorld(int rows, int columns)
+        public Cell[,] BuildWorld(int columns, int rows)
         {
-            Cell[,] newWorld = CreateNewEmptyWorld(rows, columns);
+            Cell[,] newWorld = CreateNewEmptyWorld(columns, rows);
             AssociateCellsWithNeighbours(newWorld);
             
             return newWorld;
