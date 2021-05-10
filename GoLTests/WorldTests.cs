@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GoL;
 using Xunit;
 
@@ -6,58 +7,52 @@ namespace GoLTests
 {
     public class WorldTests
     {
-        private readonly World _world;
-        public WorldTests()
-        {
-            Rules rules = new Rules();
-            Generation generation = new Generation(rules); 
-            _world = new World(generation);
-        }
-        
         [Fact]
-        public void ANewWorld_ShouldBeEmpty()
+        public void ANewWorld_ShouldBeEmptyOfCells()
         {
-            bool worldIsEmpty = _world.IsWorldEmpty();
+            World world = new World(1, 1);
 
-            Assert.True(worldIsEmpty);
+            IEnumerable<Cell> cellFormation = world.CellFormation.Cast<Cell>();
+            bool noCellsInFormation = cellFormation.All(cell => cell == null);
+
+            Assert.True(noCellsInFormation);
         }
 
         [Fact]
-        public void BuildWorld_GivenHeightAndWidth_Returns2dArrayOfCells()
+        public void BuildWorld_ShouldPopulateA2dArrayWithCells()
         {
-            int rows = 3;
-            int columns = 3;
+            World world = new World(3, 3);
 
-            Cell[,] newWorld = _world.BuildWorld(columns, rows);
+            world.BuildWorld();
             
-            Assert.NotEmpty(newWorld);
+            Assert.NotEmpty(world.CellFormation);
         }
 
         [Fact]
         public void BuildWorld_ShouldAssociateEachCellWith8Neighbours()
         {
-            int columns = 5;
-            int rows = 5;
+            World world = new World(5, 5);
             int expected = 8;
 
-            Cell[,] cells = _world.BuildWorld(columns, rows);
+            world.BuildWorld();
+            Cell cellToTest = world.CellFormation[1, 1];
+            int actual = cellToTest.Neighbours.Count;
             
-            Assert.Equal(expected, cells[2, 2].Neighbours.Count);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void BuildWorld_ShouldAssociateCellWithCorrectNeighbours()
         {
-            int columns = 5;
-            int rows = 5;
+            World world = new World(5, 5);
 
-            Cell[,] worldToTest = _world.BuildWorld(columns, rows);
-            Cell cellToTest = worldToTest[2, 2];
+            world.BuildWorld();
+            Cell cellToTest = world.CellFormation[2, 2];
             List<Cell> expected = new List<Cell>
             {
-                worldToTest[1, 1], worldToTest[2, 1], worldToTest[3, 1],
-                worldToTest[1, 2], worldToTest[3, 2],
-                worldToTest[1, 3], worldToTest[2, 3], worldToTest[3, 3]
+                world.CellFormation[1, 1], world.CellFormation[2, 1], world.CellFormation[3, 1],
+                world.CellFormation[1, 2], world.CellFormation[3, 2],
+                world.CellFormation[1, 3], world.CellFormation[2, 3], world.CellFormation[3, 3]
             };
             
             Assert.Equal(expected, cellToTest.Neighbours);
@@ -66,57 +61,14 @@ namespace GoLTests
         [Fact]
         public void ANewWorld_ShouldNoLongerBeEmptyAfterAddingACell()
         {
-            Location location = new Location(2, 2);
-            List<Cell> initialGeneration = new List<Cell> {new Cell(true)};
-            _world.SetInitialWorldState(initialGeneration);
+            World world = new World(2, 2);
 
-            bool worldIsEmpty = _world.IsWorldEmpty();
+            world.BuildWorld();
 
-            Assert.False(worldIsEmpty);
+            IEnumerable<Cell> cellFormation = world.CellFormation.Cast<Cell>();
+            bool worldIsNotEmpty = cellFormation.All(cell => cell != null);
+
+            Assert.True(worldIsNotEmpty);
         }
-        
-        [Fact]
-        public void SetInitialWorldState_GivenAListOfCells_ShouldUpdatedTheCurrentWorld()
-        {
-            List<Cell> initialState = new List<Cell>
-            {
-                new Cell(true), new Cell(false), new Cell(true)
-            };
-
-            _world.SetInitialWorldState(initialState);
-            
-            Assert.Equal(initialState, _world.CurrentGeneration);
-        }
-        
-        // [Fact]
-        // public void AdvanceToNextGeneration_ShouldUpdateTheCurrentWorldToTheNewWorld()
-        // {
-        //     Location location1 = new Location();
-        //     Location location2 = new Location();
-        //     Location location3 = new Location();
-        //     Location location4 = new Location();
-        //     Location location5 = new Location();
-        //     Location location6 = new Location();
-        //     Location location7 = new Location();
-        //     Location location8 = new Location();
-        //     Location location9 = new Location();
-        //     List<Cell> initialState = new List<Cell>
-        //     {
-        //         new Cell(location1, true), new Cell(location2, true), new Cell(location3, false),
-        //         new Cell(location4, false), new Cell(location5, true), new Cell(location6, false),
-        //         new Cell(location7, false), new Cell(location8, false), new Cell(location9, false)
-        //     };
-        //     List<Cell> expected = new List<Cell>
-        //     {
-        //         new Cell(location1, true), new Cell(location2, true), new Cell(location3, false),
-        //         new Cell(location4, true), new Cell(location5, true), new Cell(location6, false),
-        //         new Cell(location7, false), new Cell(location8, false), new Cell(location9, false)
-        //     };
-        //     _world.SetInitialWorldState(initialState);
-        //
-        //     _world.AdvanceToNextGeneration();
-        //
-        //     Assert.Equal(expected, _world.CurrentGeneration);
-        // }
     }
 }

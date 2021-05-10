@@ -1,78 +1,57 @@
-using System;
-using System.Collections.Generic;
 
 namespace GoL
 {
     public class World
     {
-        private readonly Generation _generation;
-
-        public World(Generation generation)
+        private readonly int _columns;
+        private readonly int _rows;
+        public World(int columns, int rows)
         {
-            _generation = generation;
-        }
-        public List<Cell> CurrentGeneration { get; private set; } = new List<Cell>();
-
-        public bool IsWorldEmpty()
-        {
-            return CurrentGeneration.Count == 0;
+            _columns = columns;
+            _rows = rows;
+            CellFormation = new Cell[_columns, _rows];
         }
 
-        public Cell[,] BuildWorld(int columns, int rows)
+        public readonly Cell[,] CellFormation;
+
+        public void BuildWorld()
         {
-            Cell[,] newWorld = CreateNewEmptyWorld(columns, rows);
-            AssociateCellsWithNeighbours(newWorld);
-            
-            return newWorld;
+            CreateNewEmptyWorld();
+            AssociateCellsWithNeighbours();
+
         }
 
-        private Cell[,] CreateNewEmptyWorld(int columns, int rows) // If world has dead cells, not really "empty"
+        private void CreateNewEmptyWorld() // If world has dead cells, not really "empty"
         {
-            Cell[,] newWorld = new Cell[columns, rows];
-            for (int i = 0; i < columns; i++)
+            for (int i = 0; i < _columns; i++)
             {
-                for (int j = 0; j < rows; j++)
+                for (int j = 0; j < _rows; j++)
                 {
-                    newWorld[i, j] = new Cell(false);
-                }
-            }
-
-            return newWorld;
-        }
-
-        private void AssociateCellsWithNeighbours(Cell[,] newWorld)
-        {
-            int columns = newWorld.GetLength(0);
-            int rows = newWorld.GetLength(1);
-            for (int i = 0; i < columns; i++)
-            {
-                for (int j = 0; j < rows; j++)
-                {
-                    int left = i > 0 ? i - 1 : columns - 1;
-                    int right = i < columns - 1 ? i + 1 : 0;
-                    int top = j > 0 ? j - 1 : rows - 1;
-                    int bottom = j < rows - 1 ? j + 1 : 0;
-                    newWorld[i, j].Neighbours.Add(newWorld[left, top]);
-                    newWorld[i, j].Neighbours.Add(newWorld[i, top]);
-                    newWorld[i, j].Neighbours.Add(newWorld[right, top]);
-                    newWorld[i, j].Neighbours.Add(newWorld[left, j]);
-                    newWorld[i, j].Neighbours.Add(newWorld[right, j]);
-                    newWorld[i, j].Neighbours.Add(newWorld[left, bottom]);
-                    newWorld[i, j].Neighbours.Add(newWorld[i, bottom]);
-                    newWorld[i, j].Neighbours.Add(newWorld[right, bottom]);
+                    CellFormation[i, j] = new Cell(false);
                 }
             }
         }
-        
-        public void SetInitialWorldState(List<Cell> initialState)
+
+        private void AssociateCellsWithNeighbours()
         {
-            CurrentGeneration = initialState;
-        }
-        
-        public void AdvanceToNextGeneration()
-        {
-            _generation.BuildNewGeneration(CurrentGeneration);
-            CurrentGeneration = _generation.GetNewGeneration();
+            for (int i = 0; i < _columns; i++)
+            {
+                for (int j = 0; j < _rows; j++)
+                {
+                    int left = i > 0 ? i - 1 : _columns - 1;
+                    int right = i < _columns - 1 ? i + 1 : 0;
+                    int top = j > 0 ? j - 1 : _rows - 1;
+                    int bottom = j < _rows - 1 ? j + 1 : 0;
+                    CellFormation[i, j].Neighbours.Add(CellFormation[left, top]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[i, top]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[right, top]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[left, j]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[right, j]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[left, bottom]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[i, bottom]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[right, bottom]);
+                }
+            }
         }
     }
 }
