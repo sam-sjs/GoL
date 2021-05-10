@@ -13,7 +13,7 @@ namespace GoLTests
         public RulesTests()
         {
             _rules = new Rules();
-            _cellToTest = new Cell(new Location(2, 2), true);
+            _cellToTest = new Cell(true);
         }
         
         // public static IEnumerable<object[]> StayAliveData()

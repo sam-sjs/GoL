@@ -1,29 +1,27 @@
+
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GoL
 {
     public class Cell
     {
-        private List<Cell> _neighbours = new List<Cell>();
-
-        public Cell(Location location, bool isAlive)
+        public Cell(bool isAlive)
         {
-            Location = location;
-            IsAlive = isAlive; // Consider if this needs to be set in constructor
+            IsAlive = isAlive; 
         }
 
-        public Location Location { get; }
-        public bool IsAlive { get; set; }
+        public bool IsAlive { get; }
+        public readonly List<Cell> Neighbours = new List<Cell>();
 
-        public int GetLivingNeighboursCount()
+        public int GetLivingNeighboursCount() // TODO: Rebuld this method when have concept of neighbours again
         {
-            return _neighbours.Count(cell => cell.IsAlive);
+            return 0;
         }
-
+        
         protected bool Equals(Cell other)
         {
-            return Equals(Location, other.Location) && IsAlive == other.IsAlive;
+            return IsAlive == other.IsAlive;
+            
         }
 
         public override bool Equals(object obj)
@@ -36,7 +34,7 @@ namespace GoL
 
         public override int GetHashCode()
         {
-            return (Location != null ? Location.GetHashCode() : 0);
+            return IsAlive.GetHashCode();
         }
     }
 }

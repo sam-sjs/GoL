@@ -16,8 +16,8 @@ namespace GoL
         {
             foreach (Cell cell in currentGeneration)
             {
-                cell.IsAlive = IsCellAliveInNextGeneration(cell); 
-                _nextGeneration.Add(cell);
+                bool cellIsAlive = IsCellAliveInNextGeneration(cell); 
+                _nextGeneration.Add(new Cell(cellIsAlive));
             }
         }
 
