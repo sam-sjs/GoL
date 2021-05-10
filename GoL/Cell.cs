@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GoL
 {
@@ -13,27 +14,9 @@ namespace GoL
         public bool IsAlive { get; }
         public readonly List<Cell> Neighbours = new List<Cell>();
 
-        public int GetLivingNeighboursCount() // TODO: Rebuld this method when have concept of neighbours again
+        public int GetLivingNeighboursCount()
         {
-            return 0;
+            return Neighbours.Count(cell => cell.IsAlive);
         }
-
-        // protected bool Equals(Cell other)
-        // {
-        //     return Equals(Neighbours, other.Neighbours);
-        // }
-        //
-        // public override bool Equals(object obj)
-        // {
-        //     if (ReferenceEquals(null, obj)) return false;
-        //     if (ReferenceEquals(this, obj)) return true;
-        //     if (obj.GetType() != this.GetType()) return false;
-        //     return Equals((Cell) obj);
-        // }
-        //
-        // public override int GetHashCode()
-        // {
-        //     return (Neighbours != null ? Neighbours.GetHashCode() : 0);
-        // }
     }
 }

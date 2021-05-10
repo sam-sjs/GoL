@@ -19,22 +19,22 @@ namespace GoLTests
         }
 
         [Fact]
-        public void BuildWorld_ShouldPopulateA2dArrayWithCells()
+        public void Populate_ShouldPopulateA2dArrayWithCells()
         {
             World world = new World(3, 3);
 
-            world.BuildWorld();
+            world.Populate();
             
             Assert.NotEmpty(world.CellFormation);
         }
 
         [Fact]
-        public void BuildWorld_ShouldAssociateEachCellWith8Neighbours()
+        public void Populate_ShouldAssociateEachCellWith8Neighbours()
         {
             World world = new World(5, 5);
             int expected = 8;
 
-            world.BuildWorld();
+            world.Populate();
             Cell cellToTest = world.CellFormation[1, 1];
             int actual = cellToTest.Neighbours.Count;
             
@@ -42,11 +42,11 @@ namespace GoLTests
         }
 
         [Fact]
-        public void BuildWorld_ShouldAssociateCellWithCorrectNeighbours()
+        public void Populate_ShouldAssociateCellWithCorrectNeighbours()
         {
             World world = new World(5, 5);
 
-            world.BuildWorld();
+            world.Populate();
             Cell cellToTest = world.CellFormation[2, 2];
             List<Cell> expected = new List<Cell>
             {
@@ -63,7 +63,7 @@ namespace GoLTests
         {
             World world = new World(2, 2);
 
-            world.BuildWorld();
+            world.Populate();
 
             IEnumerable<Cell> cellFormation = world.CellFormation.Cast<Cell>();
             bool worldIsNotEmpty = cellFormation.All(cell => cell != null);

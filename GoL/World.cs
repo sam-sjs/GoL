@@ -14,14 +14,14 @@ namespace GoL
 
         public readonly Cell[,] CellFormation;
 
-        public void BuildWorld()
+        public void Populate() // Consider putting this in the constructor once decided how to handle initial world setup.
         {
-            CreateNewEmptyWorld();
+            FillWorldWithCells();
             AssociateCellsWithNeighbours();
 
         }
 
-        private void CreateNewEmptyWorld() // If world has dead cells, not really "empty"
+        private void FillWorldWithCells()
         {
             for (int i = 0; i < _columns; i++)
             {
