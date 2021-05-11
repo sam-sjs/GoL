@@ -56,5 +56,11 @@ namespace GoL {
                 return ResourceManager.GetString("EnterHeight", resourceCulture);
             }
         }
+        
+        internal static string EnterWidth {
+            get {
+                return ResourceManager.GetString("EnterWidth", resourceCulture);
+            }
+        }
     }
 }

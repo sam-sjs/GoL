@@ -24,4 +24,7 @@
     <data name="EnterHeight" xml:space="preserve">
         <value>Please enter a world height:</value>
     </data>
+    <data name="EnterWidth" xml:space="preserve">
+        <value>Please enter a world width:</value>
+    </data>
 </root>

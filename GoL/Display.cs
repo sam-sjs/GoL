@@ -18,5 +18,10 @@ namespace GoL
         {
             _output.WriteLine(Messages.EnterHeight);
         }
+
+        public void EnterWidth()
+        {
+            _output.WriteLine(Messages.EnterWidth);
+        }
     }
 }

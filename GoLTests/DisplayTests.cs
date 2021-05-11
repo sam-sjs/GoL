@@ -28,5 +28,17 @@ namespace GoLTests
 
             Assert.Equal(message, output.Message);
         }
+        
+        [Fact]
+        public void DisplayEnterWidth_ShouldHaveCorrectMessage()
+        {
+            string message = "Please enter a world width:";
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            
+            display.EnterWidth();
+
+            Assert.Equal(message, output.Message);
+        }
     }
 }
