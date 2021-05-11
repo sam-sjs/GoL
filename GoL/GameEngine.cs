@@ -1,3 +1,5 @@
+using System.Threading;
+
 namespace GoL
 {
     public class GameEngine
@@ -10,6 +12,11 @@ namespace GoL
         {
             _display = display;
             _generation = generation;
+        }
+
+        public void Start()
+        {
+            _display.Welcome();
         }
     }
 }
