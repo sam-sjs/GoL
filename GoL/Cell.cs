@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace GoL
             IsAlive = isAlive; 
         }
 
-        public bool IsAlive { get; }
+        public bool IsAlive { get; set; }
         public readonly List<Cell> Neighbours = new List<Cell>();
 
         public int GetLivingNeighboursCount()

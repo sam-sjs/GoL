@@ -5,25 +5,22 @@ namespace GoL
     public class Generation
     {
         private readonly Rules _rules;
-        private readonly List<Cell> _nextGeneration = new List<Cell>();
 
         public Generation(Rules rules)
         {
             _rules = rules;
         }
+
+        public List<Cell> NextGeneration { get; } = new List<Cell>();
         
-        public void BuildNewGeneration(List<Cell> currentGeneration)
+        public void BuildNextGeneration(List<Cell> currentGeneration) // This needs to return the same cells - not new ones
         {
+            NextGeneration.Clear();
             foreach (Cell cell in currentGeneration)
             {
-                bool cellIsAlive = IsCellAliveInNextGeneration(cell); 
-                _nextGeneration.Add(new Cell(cellIsAlive));
+                cell.IsAlive = IsCellAliveInNextGeneration(cell);
+                NextGeneration.Add(cell);
             }
-        }
-
-        public List<Cell> GetNewGeneration()
-        {
-            return _nextGeneration;
         }
 
         private bool IsCellAliveInNextGeneration(Cell cell)
