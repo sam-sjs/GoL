@@ -22,9 +22,12 @@
         <value>Welcome to Game of Life!</value>
     </data>
     <data name="EnterHeight" xml:space="preserve">
-        <value>Please enter a world height:</value>
+        <value>Enter a world height:</value>
     </data>
     <data name="EnterWidth" xml:space="preserve">
-        <value>Please enter a world width:</value>
+        <value>Enter a world width:</value>
+    </data>
+    <data name="SetInitialState" xml:space="preserve">
+        <value>Set initial world state ([arrows] to move, [space] to set, [enter] to start game:</value>
     </data>
 </root>

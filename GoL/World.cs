@@ -18,7 +18,22 @@ namespace GoL
         {
             FillWorldWithCells();
             AssociateCellsWithNeighbours();
+        }
 
+        public override string ToString()
+        {
+            string toDisplay = "";
+            for (int i = 0; i < _columns; i++)
+            {
+                for (int j = 0; j < _rows; j++)
+                {
+                    toDisplay += CellFormation[i, j];
+                }
+
+                if (i < _columns - 1) toDisplay += "\n";
+            }
+
+            return toDisplay;
         }
 
         private void FillWorldWithCells()

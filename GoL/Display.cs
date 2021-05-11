@@ -23,5 +23,10 @@ namespace GoL
         {
             _output.WriteLine(Messages.EnterWidth);
         }
+
+        public void SetInitialState()
+        {
+            _output.WriteLine(Messages.SetInitialState);
+        }
     }
 }

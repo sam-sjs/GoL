@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using GoL;
 using Xunit;
 
@@ -69,6 +70,18 @@ namespace GoLTests
             bool worldIsNotEmpty = cellFormation.All(cell => cell != null);
 
             Assert.True(worldIsNotEmpty);
+        }
+
+        [Fact]
+        public void AWorld_ShouldHaveTheCorrectStringRepresentation()
+        {   // Think if there is a way to do this without Populate() - also could use a test with living cell
+            World world = new World(5, 5);
+            world.Populate();
+            string expected = ".....\n.....\n.....\n.....\n.....";
+
+            string actual = world.ToString();
+            
+            Assert.Equal(expected, actual);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace GoLTests
         [Fact]
         public void DisplayEnterHeight_ShouldHaveCorrectMessage()
         {
-            string message = "Please enter a world height:";
+            string message = "Enter a world height:";
             TestOutput output = new TestOutput();
             Display display = new Display(output);
             
@@ -32,13 +32,31 @@ namespace GoLTests
         [Fact]
         public void DisplayEnterWidth_ShouldHaveCorrectMessage()
         {
-            string message = "Please enter a world width:";
+            string message = "Enter a world width:";
             TestOutput output = new TestOutput();
             Display display = new Display(output);
             
             display.EnterWidth();
 
             Assert.Equal(message, output.Message);
+        }
+
+        [Fact]
+        public void DisplaySetInitialState_ShouldHaveCorrectMessage()
+        {
+            string message = "Set initial world state ([arrows] to move, [space] to set, [enter] to start game:";
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+
+            display.SetInitialState();
+            
+            Assert.Equal(message, output.Message);
+        }
+
+        [Fact]
+        public void DisplayWorld_ShouldShowAnEmptyRepresentationOfTheWorld()
+        {
+            
         }
     }
 }

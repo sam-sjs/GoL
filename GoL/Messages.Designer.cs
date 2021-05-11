@@ -62,5 +62,11 @@ namespace GoL {
                 return ResourceManager.GetString("EnterWidth", resourceCulture);
             }
         }
+        
+        internal static string SetInitialState {
+            get {
+                return ResourceManager.GetString("SetInitialState", resourceCulture);
+            }
+        }
     }
 }
