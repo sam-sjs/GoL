@@ -16,5 +16,17 @@ namespace GoLTests
 
             Assert.Equal(message, output.Message);
         }
+        
+        [Fact]
+        public void DisplayEnterHeight_ShouldHaveCorrectMessage()
+        {
+            string message = "Please enter a world height:";
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            
+            display.EnterHeight();
+
+            Assert.Equal(message, output.Message);
+        }
     }
 }

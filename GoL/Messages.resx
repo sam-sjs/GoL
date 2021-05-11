@@ -21,4 +21,7 @@
     <data name="Welcome" xml:space="preserve">
         <value>Welcome to Game of Life!</value>
     </data>
+    <data name="EnterHeight" xml:space="preserve">
+        <value>Please enter a world height:</value>
+    </data>
 </root>
