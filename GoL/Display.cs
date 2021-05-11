@@ -28,5 +28,10 @@ namespace GoL
         {
             _output.WriteLine(Messages.SetInitialState);
         }
+
+        public void World(World world)
+        {
+            _output.WriteLine(world.ToString());
+        }
     }
 }

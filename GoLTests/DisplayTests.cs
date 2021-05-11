@@ -55,8 +55,15 @@ namespace GoLTests
 
         [Fact]
         public void DisplayWorld_ShouldShowAnEmptyRepresentationOfTheWorld()
-        {
+        {   // Add test for populated world - will I have to use Populate() for this?
+            World world = new World(5, 5);
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            string message = "\n\n\n\n";
+
+            display.World(world);
             
+            Assert.Equal(message, output.Message);
         }
     }
 }
