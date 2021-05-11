@@ -11,7 +11,7 @@ namespace GoL
 
         public void Welcome()
         {
-            _output.WriteLine("Welcome to Game of Life!");
+            _output.WriteLine(Messages.Welcome);
         }
     }
 }
