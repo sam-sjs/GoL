@@ -10,7 +10,7 @@ namespace GoLTests
         private static readonly Cell Living2 = new Cell(true);
         private static readonly Cell Living3 = new Cell(true);
         private static readonly Cell Living4 = new Cell(true);
-        private static readonly List<Cell> OneLivingNeighbours = new List<Cell> {Living1}; 
+        private static readonly List<Cell> OneLivingNeighbour = new List<Cell> {Living1}; 
         private static readonly List<Cell> TwoLivingNeighbours = new List<Cell> {Living1, Living2}; 
         private static readonly List<Cell> ThreeLivingNeighbours = new List<Cell> {Living1, Living2, Living3}; 
         private static readonly List<Cell> FourLivingNeighbours = new List<Cell> {Living1, Living2, Living3, Living4}; 
@@ -25,8 +25,8 @@ namespace GoLTests
 
         public TestPatterns()
         {
-            _livingCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbours);
-            _deadCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbours);
+            _livingCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbour);
+            _deadCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbour);
             _livingCellWithTwoLivingNeighbours.Neighbours.AddRange(TwoLivingNeighbours);
             _deadCellWithTwoLivingNeighbours.Neighbours.AddRange(TwoLivingNeighbours);
             _livingCellWithThreeLivingNeighbours.Neighbours.AddRange(ThreeLivingNeighbours);
@@ -38,50 +38,26 @@ namespace GoLTests
         {
             yield return new object[]
             {
-                new List<Cell> { _livingCellWithOneLivingNeighbours },
-                false
+                new List<Cell>
+                {
+                    _livingCellWithOneLivingNeighbours,
+                    _deadCellWithTwoLivingNeighbours,
+                    _livingCellWithThreeLivingNeighbours,
+                    _deadCellWithFourLivingNeighbours
+                },
+                new List<bool> { false, false, true, false }
             };
             
             yield return new object[]
             {
-                new List<Cell> { _deadCellWithOneLivingNeighbours },
-                false
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _livingCellWithTwoLivingNeighbours },
-                true
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _deadCellWithTwoLivingNeighbours },
-                false
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _livingCellWithThreeLivingNeighbours },
-                true
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _deadCellWithThreeLivingNeighbours },
-                true
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _livingCellWithFourLivingNeighbours },
-                false
-            };
-            
-            yield return new object[]
-            {
-                new List<Cell> { _deadCellWithFourLivingNeighbours },
-                false
+                new List<Cell>
+                {
+                    _deadCellWithOneLivingNeighbours,
+                    _livingCellWithTwoLivingNeighbours,
+                    _deadCellWithThreeLivingNeighbours,
+                    _livingCellWithFourLivingNeighbours
+                },
+                new List<bool> { false, true, true, false }
             };
         }
 

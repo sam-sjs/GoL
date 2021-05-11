@@ -13,7 +13,7 @@ namespace GoL
 
         public List<Cell> NextGeneration { get; } = new List<Cell>();
         
-        public void BuildNextGeneration(List<Cell> currentGeneration) // This needs to return the same cells - not new ones
+        public void BuildNextGeneration(List<Cell> currentGeneration)
         {
             NextGeneration.Clear();
             foreach (Cell cell in currentGeneration)
