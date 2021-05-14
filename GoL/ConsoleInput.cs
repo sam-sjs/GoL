@@ -8,5 +8,10 @@ namespace GoL
         {
             return Console.ReadLine();
         }
+
+        public ConsoleKeyInfo ReadKey()
+        {
+            return Console.ReadKey();
+        }
     }
 }

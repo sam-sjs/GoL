@@ -65,5 +65,17 @@ namespace GoLTests
             
             Assert.Equal(message, output.Message);
         }
+        
+        [Fact]
+        public void DisplayInvalidInput_ShouldHaveCorrectMessage()
+        {
+            string message = "Invalid input - please try again:";
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+
+            display.InvalidInput();
+            
+            Assert.Equal(message, output.Message);
+        }
     }
 }

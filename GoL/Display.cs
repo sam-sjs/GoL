@@ -33,5 +33,10 @@ namespace GoL
         {
             _output.WriteLine(world.ToString());
         }
+        
+        public void InvalidInput()
+        {
+            _output.WriteLine(Messages.InvalidInput);
+        }
     }
 }

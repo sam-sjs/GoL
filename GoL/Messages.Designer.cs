@@ -68,5 +68,11 @@ namespace GoL {
                 return ResourceManager.GetString("SetInitialState", resourceCulture);
             }
         }
+        
+        internal static string InvalidInput {
+            get {
+                return ResourceManager.GetString("InvalidInput", resourceCulture);
+            }
+        }
     }
 }

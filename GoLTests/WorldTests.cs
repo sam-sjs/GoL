@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using GoL;
 using Xunit;
 
@@ -51,9 +50,9 @@ namespace GoLTests
             Cell cellToTest = world.CellFormation[2, 2];
             List<Cell> expected = new List<Cell>
             {
-                world.CellFormation[1, 1], world.CellFormation[2, 1], world.CellFormation[3, 1],
-                world.CellFormation[1, 2], world.CellFormation[3, 2],
-                world.CellFormation[1, 3], world.CellFormation[2, 3], world.CellFormation[3, 3]
+                world.CellFormation[1, 1], world.CellFormation[1, 2], world.CellFormation[1, 3],
+                world.CellFormation[2, 1], world.CellFormation[2, 3],
+                world.CellFormation[3, 1], world.CellFormation[3, 2], world.CellFormation[3, 3]
             };
             
             Assert.Equal(expected, cellToTest.Neighbours);

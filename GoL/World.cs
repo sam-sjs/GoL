@@ -3,13 +3,13 @@ namespace GoL
 {
     public class World
     {
-        private readonly int _columns;
         private readonly int _rows;
-        public World(int columns, int rows)
+        private readonly int _columns;
+        public World(int rows, int columns)
         {
-            _columns = columns;
             _rows = rows;
-            CellFormation = new Cell[_columns, _rows];
+            _columns = columns;
+            CellFormation = new Cell[_rows, _columns];
         }
 
         public readonly Cell[,] CellFormation;
@@ -23,9 +23,9 @@ namespace GoL
         public override string ToString()
         {
             string toDisplay = "";
-            for (int i = 0; i < _columns; i++)
+            for (int i = 0; i < _rows; i++)
             {
-                for (int j = 0; j < _rows; j++)
+                for (int j = 0; j < _columns; j++)
                 {
                     toDisplay += CellFormation[i, j];
                 }
@@ -38,33 +38,33 @@ namespace GoL
 
         private void FillWorldWithCells()
         {
-            for (int i = 0; i < _columns; i++)
+            for (int i = 0; i < _rows; i++)
             {
-                for (int j = 0; j < _rows; j++)
+                for (int j = 0; j < _columns; j++)
                 {
                     CellFormation[i, j] = new Cell(false);
                 }
             }
         }
 
-        private void AssociateCellsWithNeighbours()
+        private void AssociateCellsWithNeighbours() // Check this all still aligns correctly
         {
-            for (int i = 0; i < _columns; i++)
+            for (int i = 0; i < _rows; i++)
             {
-                for (int j = 0; j < _rows; j++)
+                for (int j = 0; j < _columns; j++)
                 {
-                    int left = i > 0 ? i - 1 : _columns - 1;
-                    int right = i < _columns - 1 ? i + 1 : 0;
-                    int top = j > 0 ? j - 1 : _rows - 1;
-                    int bottom = j < _rows - 1 ? j + 1 : 0;
-                    CellFormation[i, j].Neighbours.Add(CellFormation[left, top]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[i, top]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[right, top]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[left, j]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[right, j]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[left, bottom]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[i, bottom]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[right, bottom]);
+                    int top = i > 0 ? i - 1 : _rows - 1;
+                    int bottom = i < _rows - 1 ? i + 1 : 0;
+                    int left = j > 0 ? j - 1 : _columns - 1;
+                    int right = j < _columns - 1 ? j + 1 : 0;
+                    CellFormation[i, j].Neighbours.Add(CellFormation[top, left]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[top, j]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[top, right]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[i, left]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[i, right]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, left]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, j]);
+                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, right]);
                 }
             }
         }

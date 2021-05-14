@@ -15,7 +15,7 @@ namespace GoLTests
             int expected = 2;
 
             int actual = cellToTest.GetLivingNeighboursCount();
-            
+
             Assert.Equal(expected, actual);
         }
     }

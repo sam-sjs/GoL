@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GoL;
 
@@ -5,17 +6,22 @@ namespace GoLTests
 {
     public class TestInput : IInput
     {
-        private readonly List<string> _inputs;
+        private readonly List<object> _inputs;
         private int _timesCalled;
 
-        public TestInput(List<string> inputs)
+        public TestInput(List<object> inputs)
         {
             _inputs = inputs;
         }
 
         public string ReadLine()
         {
-            return _inputs[_timesCalled++];
+            return (string) _inputs[_timesCalled++];
+        }
+
+        public ConsoleKeyInfo ReadKey()
+        {
+            return (ConsoleKeyInfo) _inputs[_timesCalled++];
         }
     }
 }
