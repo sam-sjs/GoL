@@ -1,3 +1,5 @@
+using System;
+
 namespace GoL
 {
     public class Display
@@ -37,6 +39,25 @@ namespace GoL
         public void InvalidInput()
         {
             _output.WriteLine(Messages.InvalidInput);
+        }
+
+        public void MoveCursor(ConsoleKey input)
+        {
+            switch (input)
+            {
+                case ConsoleKey.UpArrow:
+                    _output.SetCursorPosition(_output.CursorLeft, _output.CursorTop - 1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    _output.SetCursorPosition(_output.CursorLeft, _output.CursorTop + 1);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    _output.SetCursorPosition(_output.CursorLeft - 1, _output.CursorTop);
+                    break;
+                case ConsoleKey.RightArrow:
+                    _output.SetCursorPosition(_output.CursorLeft + 1, _output.CursorTop);
+                    break;
+            }
         }
     }
 }

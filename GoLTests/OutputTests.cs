@@ -26,8 +26,8 @@ namespace GoLTests
 
             output.SetCursorPosition(expectedX, expectedY);
             
-            Assert.Equal(expectedX, output.XPosition);
-            Assert.Equal(expectedY, output.YPosition);
+            Assert.Equal(expectedX, output.CursorLeft);
+            Assert.Equal(expectedY, output.CursorTop);
         }
     }
 }
