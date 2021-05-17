@@ -13,5 +13,10 @@ namespace GoL
         {
             return Console.ReadKey();
         }
+
+        public ConsoleKeyInfo ReadKey(bool intercept)
+        {
+            return Console.ReadKey(intercept);
+        }
     }
 }

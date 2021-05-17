@@ -8,6 +8,8 @@ namespace GoL
         private readonly IInput _input;
         private readonly Generation _generation;
         private World _world;
+        private readonly ConsoleKey[] _arrowKeys = new ConsoleKey[]
+            {ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow}; 
 
         public GameEngine(Display display, IInput input, Generation generation)
         {
@@ -19,16 +21,21 @@ namespace GoL
         public void Start()
         {
             _display.Welcome();
+            CreateWorld();
+            Console.Clear();
+            _world.Populate();
+            _display.World(_world);
+            Console.SetCursorPosition(0, 0);
+            SetInitialWorldState();
+        }
+
+        private void CreateWorld()
+        {
             _display.EnterHeight();
             int height = GetValidDimension();
             _display.EnterWidth();
             int width = GetValidDimension();
-            Console.Clear();
             _world = new World(height, width);
-            _world.Populate();
-            _display.World(_world);
-            Console.SetCursorPosition(0, 0);
-            NavigateConsole();
         }
 
         private int GetValidDimension()
@@ -42,12 +49,12 @@ namespace GoL
             return dimension;
         }
 
-        private void NavigateConsole()
+        private void SetInitialWorldState() // Potentially extract navigation to new class.
         {
             ConsoleKey input;
             do
             {
-                input = Console.ReadKey(true).Key;
+                input = _input.ReadKey(true).Key;
                 int xPosition = Console.CursorLeft;
                 int yPosition = Console.CursorTop;
                 if (input == ConsoleKey.UpArrow) Console.SetCursorPosition(xPosition, yPosition - 1);

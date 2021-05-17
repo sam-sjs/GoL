@@ -8,5 +8,10 @@ namespace GoL
         {
             Console.WriteLine(message);
         }
+
+        public void SetCursorPosition(int left, int top)
+        {
+            Console.SetCursorPosition(left, top);
+        }
     }
 }
