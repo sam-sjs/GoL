@@ -4,8 +4,8 @@ namespace GoL
 {
     public class ConsoleOutput : IOutput
     {
-        public int CursorLeft { get; set; } = Console.CursorLeft;
-        public int CursorTop { get; set; } = Console.CursorTop;
+        public int CursorLeft { get; set; }
+        public int CursorTop { get; set; }
 
         public void WriteLine(string message)
         {
@@ -15,6 +15,9 @@ namespace GoL
         public void SetCursorPosition(int left, int top)
         {
             Console.SetCursorPosition(left, top);
+            // Next two lines seem kinda silly.
+            CursorLeft = Console.CursorLeft;
+            CursorTop = Console.CursorTop;
         }
     }
 }

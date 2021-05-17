@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace GoL
 {
@@ -49,18 +50,13 @@ namespace GoL
             return dimension;
         }
 
-        private void SetInitialWorldState() // Potentially extract navigation to new class.
+        private void SetInitialWorldState()
         {
             ConsoleKey input;
             do
             {
                 input = _input.ReadKey(true).Key;
-                int xPosition = Console.CursorLeft;
-                int yPosition = Console.CursorTop;
-                if (input == ConsoleKey.UpArrow) Console.SetCursorPosition(xPosition, yPosition - 1);
-                if (input == ConsoleKey.DownArrow) Console.SetCursorPosition(xPosition, yPosition + 1);
-                if (input == ConsoleKey.LeftArrow) Console.SetCursorPosition(xPosition - 1, yPosition);
-                if (input == ConsoleKey.RightArrow) Console.SetCursorPosition(xPosition + 1, yPosition);
+                if (_arrowKeys.Contains(input)) _display.MoveCursor(input);
             } while (input != ConsoleKey.Q);
         }
     }
