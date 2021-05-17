@@ -98,5 +98,35 @@ namespace GoLTests
             Assert.Equal(expectedLeft, actualLeft);
             Assert.Equal(expectedTop, actualTop);
         }
+
+        [Fact]
+        public void Clear_ShouldRemoveAllMessagesFromDisplay()
+        {
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            output.Message = "Test message to be cleared";
+            string expected = "";
+            
+            display.Clear();
+            
+            Assert.Equal(expected, output.Message);
+        }
+
+        [Fact]
+        public void ResetCursorPosition_ShouldSetTheCursorTo00()
+        {
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            output.CursorLeft = 5;
+            output.CursorTop = 3;
+            int expected = 0;
+
+            display.ResetCursorPosition();
+            int actualLeft = output.CursorLeft;
+            int actualTop = output.CursorTop;
+            
+            Assert.Equal(expected, actualLeft);
+            Assert.Equal(expected, actualTop);
+        }
     }
 }

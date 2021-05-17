@@ -41,6 +41,16 @@ namespace GoL
             _output.WriteLine(Messages.InvalidInput);
         }
 
+        public void Clear()
+        {
+            _output.Clear();
+        }
+
+        public void ResetCursorPosition()
+        {
+            _output.SetCursorPosition(0, 0);
+        }
+
         public void MoveCursor(ConsoleKey input)
         {
             switch (input)

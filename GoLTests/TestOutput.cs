@@ -18,5 +18,10 @@ namespace GoLTests
             CursorLeft = left;
             CursorTop = top;
         }
+
+        public void Clear()
+        {
+            Message = "";
+        }
     }
 }

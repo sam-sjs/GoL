@@ -8,25 +8,26 @@ namespace GoL
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
-        private World _world;
         private readonly ConsoleKey[] _arrowKeys = new ConsoleKey[]
             {ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow}; 
+        private World _world;
 
-        public GameEngine(Display display, IInput input, Generation generation)
+        public GameEngine(Display display, IInput input)
         {
             _display = display;
             _input = input;
-            _generation = generation;
+            Rules rules = new Rules();
+            _generation = new Generation(rules);
         }
 
         public void Start()
         {
             _display.Welcome();
             CreateWorld();
-            Console.Clear();
+            _display.Clear();
             _world.Populate();
             _display.World(_world);
-            Console.SetCursorPosition(0, 0);
+            _display.ResetCursorPosition();
             SetInitialWorldState();
         }
 

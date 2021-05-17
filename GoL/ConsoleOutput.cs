@@ -15,9 +15,13 @@ namespace GoL
         public void SetCursorPosition(int left, int top)
         {
             Console.SetCursorPosition(left, top);
-            // Next two lines seem kinda silly.
             CursorLeft = Console.CursorLeft;
             CursorTop = Console.CursorTop;
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
         }
     }
 }
