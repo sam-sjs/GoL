@@ -2,7 +2,7 @@ using System;
 
 namespace GoL
 {
-    public class WorldLocation
+    public class WorldLocation // This sounds kind of like the location of the world not the location within the world
     {
         public WorldLocation(int x, int y)
         {

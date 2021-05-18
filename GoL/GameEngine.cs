@@ -58,6 +58,11 @@ namespace GoL
             {
                 input = _input.ReadKey(true).Key;
                 if (_arrowKeys.Contains(input)) _display.MoveCursor(input);
+                if (input == ConsoleKey.Spacebar)
+                {
+                    WorldLocation livingCell = _display.GetCursorPosition();
+                    _world.SetLivingCellAtLocation(livingCell);
+                }
             } while (input != ConsoleKey.Enter);
         }
     }

@@ -20,6 +20,11 @@ namespace GoL
             AssociateCellsWithNeighbours();
         }
 
+        public void SetLivingCellAtLocation(WorldLocation location)
+        {
+            CellFormation[location.XPosition, location.YPosition].IsAlive = true;
+        }
+
         public override string ToString()
         {
             string toDisplay = "";
