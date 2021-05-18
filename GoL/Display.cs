@@ -74,5 +74,14 @@ namespace GoL
         {
             return new WorldLocation(_output.CursorLeft, _output.CursorTop);
         }
+
+        public void RefreshWorld(World world)
+        {
+            int cursorLeft = _output.CursorLeft;
+            int cursorTop = _output.CursorTop;
+            Clear();
+            World(world);
+            _output.SetCursorPosition(cursorLeft, cursorTop);
+        }
     }
 }

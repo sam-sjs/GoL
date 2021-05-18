@@ -141,5 +141,20 @@ namespace GoLTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void RefreshWorld_ShouldPlaceCursorInSamePositionAfterRefresh()
+        {
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            World world = new World(5, 5);
+            output.CursorLeft = 3;
+            output.CursorTop = 2;
+            
+            display.RefreshWorld(world);
+            
+            Assert.True(output.CursorLeft == 3);
+            Assert.True(output.CursorTop == 2);
+        }
     }
 }

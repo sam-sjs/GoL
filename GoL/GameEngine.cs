@@ -62,6 +62,7 @@ namespace GoL
                 {
                     WorldLocation livingCell = _display.GetCursorPosition();
                     _world.SetLivingCellAtLocation(livingCell);
+                    _display.RefreshWorld(_world);
                 }
             } while (input != ConsoleKey.Enter);
         }
