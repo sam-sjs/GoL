@@ -47,7 +47,7 @@ namespace GoL
             }
         }
 
-        private void AssociateCellsWithNeighbours() // Check this all still aligns correctly
+        private void AssociateCellsWithNeighbours()
         {
             for (int i = 0; i < _rows; i++)
             {

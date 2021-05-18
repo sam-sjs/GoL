@@ -14,7 +14,7 @@ namespace GoLTests
             TestOutput output = new TestOutput();
             Display display = new Display(output);
             
-            display.Welcome();
+            display.WelcomeMessage();
 
             Assert.Equal(message, output.Message);
         }

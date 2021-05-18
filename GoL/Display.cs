@@ -11,7 +11,7 @@ namespace GoL
             _output = output;
         }
 
-        public void Welcome()
+        public void WelcomeMessage()
         {
             _output.WriteLine(Messages.Welcome);
         }

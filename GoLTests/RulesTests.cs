@@ -30,7 +30,7 @@ namespace GoLTests
         {
             _cellToTest.Neighbours.AddRange(neighbours);
             
-            bool actual = _rules.DoesCellStayAlive(_cellToTest);
+            bool actual = _rules.DoesCellHaveEnoughNeighboursToStayAlive(_cellToTest);
         
             Assert.Equal(expected, actual);
         }
@@ -48,7 +48,7 @@ namespace GoLTests
         {
             _cellToTest.Neighbours.AddRange(neighbours);
             
-            bool actual = _rules.DoesCellComeToLife(_cellToTest);
+            bool actual = _rules.DoesCellHaveEnoughNeighboursToComeToLife(_cellToTest);
         
             Assert.Equal(expected, actual);
         }

@@ -26,8 +26,8 @@ namespace GoL
         private bool IsCellAliveInNextGeneration(Cell cell)
         {
             return cell.IsAlive ?
-                _rules.DoesCellStayAlive(cell) :
-                _rules.DoesCellComeToLife(cell);
+                _rules.DoesCellHaveEnoughNeighboursToStayAlive(cell) :
+                _rules.DoesCellHaveEnoughNeighboursToComeToLife(cell);
         }
     }
 }

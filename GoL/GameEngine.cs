@@ -22,10 +22,10 @@ namespace GoL
 
         public void Start()
         {
-            _display.Welcome();
+            _display.WelcomeMessage();
             CreateWorld();
-            _display.Clear();
             _world.Populate();
+            _display.Clear();
             _display.World(_world);
             _display.ResetCursorPosition();
             SetInitialWorldState();
@@ -34,16 +34,16 @@ namespace GoL
         private void CreateWorld()
         {
             _display.EnterHeight();
-            int height = GetValidDimension();
+            int worldHeight = GetValidWorldDimension();
             _display.EnterWidth();
-            int width = GetValidDimension();
-            _world = new World(height, width);
+            int worldWidth = GetValidWorldDimension();
+            _world = new World(worldHeight, worldWidth);
         }
 
-        private int GetValidDimension()
+        private int GetValidWorldDimension() // From user?
         {
             int dimension;
-            while (!Int32.TryParse(_input.ReadLine(), out dimension))
+            while (!int.TryParse(_input.ReadLine(), out dimension))
             {
                 _display.InvalidInput();
             }
@@ -51,14 +51,14 @@ namespace GoL
             return dimension;
         }
 
-        private void SetInitialWorldState()
+        private void SetInitialWorldState() // Potentially rename this.
         {
             ConsoleKey input;
             do
             {
                 input = _input.ReadKey(true).Key;
                 if (_arrowKeys.Contains(input)) _display.MoveCursor(input);
-            } while (input != ConsoleKey.Q);
+            } while (input != ConsoleKey.Enter);
         }
     }
 }

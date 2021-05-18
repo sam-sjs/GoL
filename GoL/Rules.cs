@@ -7,13 +7,13 @@ namespace GoL
         private const int CellSurvivesUpperCount = 3;
         private const int CellComesToLifeCount = 3;
 
-        public bool DoesCellStayAlive(Cell cell)
+        public bool DoesCellHaveEnoughNeighboursToStayAlive(Cell cell)
         {
             return cell.GetLivingNeighboursCount() == CellSurvivesLowerCount ||
                    cell.GetLivingNeighboursCount() == CellSurvivesUpperCount;
         }
 
-        public bool DoesCellComeToLife(Cell cell)
+        public bool DoesCellHaveEnoughNeighboursToComeToLife(Cell cell)
         {
             return cell.GetLivingNeighboursCount() == CellComesToLifeCount;
         }
