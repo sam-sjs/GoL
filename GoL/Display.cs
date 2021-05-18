@@ -69,5 +69,10 @@ namespace GoL
                     break;
             }
         }
+
+        public WorldLocation GetCursorPosition()
+        {
+            return new WorldLocation(_output.CursorLeft, _output.CursorTop);
+        }
     }
 }

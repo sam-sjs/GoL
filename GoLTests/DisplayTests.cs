@@ -1,7 +1,6 @@
 using System;
 using GoL;
 using Xunit;
-using Xunit.Sdk;
 
 namespace GoLTests
 {
@@ -127,6 +126,20 @@ namespace GoLTests
             
             Assert.Equal(expected, actualLeft);
             Assert.Equal(expected, actualTop);
+        }
+
+        [Fact]
+        public void GetCursorPosition_ShouldReturnCurrentCursorLocation()
+        {
+            TestOutput output = new TestOutput();
+            Display display = new Display(output);
+            output.CursorLeft = 3;
+            output.CursorTop = 2;
+            WorldLocation expected = new WorldLocation(3, 2);
+
+            WorldLocation actual = display.GetCursorPosition();
+
+            Assert.Equal(expected, actual);
         }
     }
 }
