@@ -12,6 +12,8 @@ namespace GoL
             CellFormation = new Cell[_rows, _columns];
         }
 
+        // TODO Double check this array builds around the right way or at least that row/column are identified
+        // correctly.  Out of alignment with x/y of display/worldlocation.
         public readonly Cell[,] CellFormation;
 
         public void Populate() // Consider putting this in the constructor once decided how to handle initial world setup.
@@ -22,7 +24,7 @@ namespace GoL
 
         public void SetLivingCellAtLocation(WorldLocation location)
         {
-            CellFormation[location.XPosition, location.YPosition].IsAlive = true;
+            CellFormation[location.Row, location.Column].IsAlive = true;
         }
 
         public override string ToString()

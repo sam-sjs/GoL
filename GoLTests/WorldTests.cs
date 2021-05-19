@@ -87,7 +87,7 @@ namespace GoLTests
         public void SetLivingCellAtLocation_ShouldUpdateTheCorrectCellToAlive()
         {   // As above consider whether there is a way to do this without Populate()
             World world = new World(5, 5);
-            WorldLocation location = new WorldLocation(3, 2);
+            WorldLocation location = new WorldLocation(2, 3);
             world.Populate();
 
             bool initialState = world.CellFormation[3, 2].IsAlive;

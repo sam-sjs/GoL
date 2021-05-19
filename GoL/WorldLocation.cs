@@ -4,18 +4,18 @@ namespace GoL
 {
     public class WorldLocation // This sounds kind of like the location of the world not the location within the world
     {
-        public WorldLocation(int x, int y)
+        public WorldLocation(int column, int row)
         {
-            XPosition = x;
-            YPosition = y;
+            Column = column;
+            Row = row;
         }
         
-        public int XPosition { get; }
-        public int YPosition { get; }
+        public int Column { get; }
+        public int Row { get; }
 
         protected bool Equals(WorldLocation other)
         {
-            return XPosition == other.XPosition && YPosition == other.YPosition;
+            return Column == other.Column && Row == other.Row;
         }
 
         public override bool Equals(object obj)
@@ -28,7 +28,7 @@ namespace GoL
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(XPosition, YPosition);
+            return HashCode.Combine(Column, Row);
         }
     }
 }

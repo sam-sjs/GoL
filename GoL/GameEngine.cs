@@ -57,14 +57,22 @@ namespace GoL
             do
             {
                 input = _input.ReadKey(true).Key;
-                if (_arrowKeys.Contains(input)) _display.MoveCursor(input);
+                if (_arrowKeys.Contains(input))
+                {
+                    _display.MoveCursor(input);
+                }
                 if (input == ConsoleKey.Spacebar)
                 {
-                    WorldLocation livingCell = _display.GetCursorPosition();
-                    _world.SetLivingCellAtLocation(livingCell);
-                    _display.RefreshWorld(_world);
+                    SetLivingCell();
                 }
             } while (input != ConsoleKey.Enter);
+        }
+
+        private void SetLivingCell()
+        {
+            WorldLocation livingCell = _display.GetCursorPosition();
+            _world.SetLivingCellAtLocation(livingCell);
+            _display.RefreshWorld(_world);
         }
     }
 }
