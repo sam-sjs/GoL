@@ -87,7 +87,7 @@ namespace GoLTests
         public void SetLivingCellAtLocation_ShouldUpdateTheCorrectCellToAlive()
         {   // As above consider whether there is a way to do this without Populate()
             World world = new World(5, 5);
-            WorldLocation location = new WorldLocation(2, 3);
+            Location location = new Location(2, 3);
             world.Populate();
 
             bool initialState = world.CellFormation[3, 2].IsAlive;
@@ -96,6 +96,23 @@ namespace GoLTests
             
             Assert.False(initialState);
             Assert.True(newState);
+        }
+
+        [Fact]
+        public void GetCellsInFormation_ShouldReturnAFlattenedListOfCells()
+        {
+            World world = new World(3, 3);
+            world.Populate();
+            List<Cell> expected = new List<Cell>
+            {
+                world.CellFormation[0, 0], world.CellFormation[0, 1], world.CellFormation[0, 2],
+                world.CellFormation[1, 0], world.CellFormation[1, 1], world.CellFormation[1, 2],
+                world.CellFormation[2, 0], world.CellFormation[2, 1], world.CellFormation[2, 2]
+            };
+
+            List<Cell> actual = world.GetCellsInFormation();
+
+            Assert.Equal(expected, actual);
         }
     }
 }

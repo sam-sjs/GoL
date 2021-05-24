@@ -11,16 +11,18 @@ namespace GoL
             _rules = rules;
         }
 
-        public List<Cell> NextGeneration { get; } = new List<Cell>();
+        // public List<Cell> NextGeneration { get; } = new List<Cell>();
         
-        public void BuildNextGeneration(List<Cell> currentGeneration)
+        public List<Cell> BuildNextGeneration(List<Cell> currentGeneration)
         {
-            NextGeneration.Clear();
+            List<Cell> nextGeneration = new List<Cell>();
             foreach (Cell cell in currentGeneration)
             {
                 cell.IsAlive = IsCellAliveInNextGeneration(cell);
-                NextGeneration.Add(cell);
+                nextGeneration.Add(cell);
             }
+
+            return nextGeneration;
         }
 
         private bool IsCellAliveInNextGeneration(Cell cell)

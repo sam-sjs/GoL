@@ -28,7 +28,7 @@
         <value>Enter a world width:</value>
     </data>
     <data name="SetInitialState" xml:space="preserve">
-        <value>Set initial world state ([arrows] to move, [space] to set, [enter] to start game:</value>
+        <value>Set initial world state ([arrows] to move, [space] to set, [enter] to start game):</value>
     </data>
     <data name="InvalidInput" xml:space="preserve">
         <value>Invalid input - please try again:</value>

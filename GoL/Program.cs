@@ -10,7 +10,7 @@ namespace GoL
             ConsoleInput input = new ConsoleInput();
             Display display = new Display(output);
             GameEngine gameEngine = new GameEngine(display, input);
-            gameEngine.Start();
+            gameEngine.Run();
         }
     }
 }

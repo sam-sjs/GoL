@@ -70,9 +70,9 @@ namespace GoL
             }
         }
 
-        public WorldLocation GetCursorPosition()
+        public Location GetCursorPosition()
         {
-            return new WorldLocation(_output.CursorLeft, _output.CursorTop);
+            return new Location(_output.CursorLeft, _output.CursorTop);
         }
 
         public void RefreshWorld(World world)

@@ -6,6 +6,5 @@ namespace GoL
     {
         public string ReadLine();
         public ConsoleKeyInfo ReadKey();
-        public ConsoleKeyInfo ReadKey(bool intercept);
     }
 }

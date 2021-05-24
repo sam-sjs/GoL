@@ -4,7 +4,7 @@ using GoL;
 
 namespace GoLTests
 {
-    public class TestPatterns : IEnumerable<object[]>
+    public class TestFixtures : IEnumerable<object[]>
     {
         private static readonly Cell Living1 = new Cell(true);
         private static readonly Cell Living2 = new Cell(true);
@@ -23,7 +23,7 @@ namespace GoLTests
         private readonly Cell _livingCellWithFourLivingNeighbours = new Cell(true);
         private readonly Cell _deadCellWithFourLivingNeighbours = new Cell(false);
 
-        public TestPatterns()
+        public TestFixtures()
         {
             _livingCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbour);
             _deadCellWithOneLivingNeighbours.Neighbours.AddRange(OneLivingNeighbour);

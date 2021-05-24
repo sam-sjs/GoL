@@ -23,10 +23,5 @@ namespace GoLTests
         {
             return (ConsoleKeyInfo) _inputs[_timesCalled++];
         }
-
-        public ConsoleKeyInfo ReadKey(bool intercept)
-        {
-            return (ConsoleKeyInfo) _inputs[_timesCalled++]; // Is it possible to test for the intercept?
-        }
     }
 }

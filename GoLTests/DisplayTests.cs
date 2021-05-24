@@ -45,7 +45,7 @@ namespace GoLTests
         [Fact]
         public void DisplaySetInitialState_ShouldHaveCorrectMessage()
         {
-            string message = "Set initial world state ([arrows] to move, [space] to set, [enter] to start game:";
+            string message = "Set initial world state ([arrows] to move, [space] to set, [enter] to start game):";
             TestOutput output = new TestOutput();
             Display display = new Display(output);
 
@@ -135,9 +135,9 @@ namespace GoLTests
             Display display = new Display(output);
             output.CursorLeft = 3;
             output.CursorTop = 2;
-            WorldLocation expected = new WorldLocation(3, 2);
+            Location expected = new Location(3, 2);
 
-            WorldLocation actual = display.GetCursorPosition();
+            Location actual = display.GetCursorPosition();
 
             Assert.Equal(expected, actual);
         }

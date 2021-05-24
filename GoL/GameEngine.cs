@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GoL
@@ -20,7 +21,7 @@ namespace GoL
             _generation = new Generation(rules);
         }
 
-        public void Start()
+        public void Run()
         {
             _display.WelcomeMessage();
             CreateWorld();
@@ -56,7 +57,7 @@ namespace GoL
             ConsoleKey input;
             do
             {
-                input = _input.ReadKey(true).Key;
+                input = _input.ReadKey().Key;
                 if (_arrowKeys.Contains(input))
                 {
                     _display.MoveCursor(input);
@@ -68,11 +69,21 @@ namespace GoL
             } while (input != ConsoleKey.Enter);
         }
 
-        private void SetLivingCell()
+        private void SetLivingCell() // Name is very similar to World method.
         {
-            WorldLocation livingCell = _display.GetCursorPosition();
+            Location livingCell = _display.GetCursorPosition();
             _world.SetLivingCellAtLocation(livingCell);
             _display.RefreshWorld(_world);
+        }
+
+        private void StartGame()
+        {
+            ConsoleKey input;
+            do
+            {
+                input = _input.ReadKey().Key;
+                List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCellsInFormation());
+            } while (input != ConsoleKey.Q);
         }
     }
 }

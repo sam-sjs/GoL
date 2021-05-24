@@ -8,14 +8,13 @@ namespace GoLTests
     public class GenerationTests
     {
         [Theory]
-        [ClassData(typeof(TestPatterns))]
+        [ClassData(typeof(TestFixtures))]
         public void BuildNextGeneration_CreatesExpectedPattern(List<Cell> input, List<bool> expected)
         {
             Rules rules = new Rules();
             Generation generation = new Generation(rules);
             
-            generation.BuildNextGeneration(input);
-            List<bool> actual = generation.NextGeneration.Select(cell => cell.IsAlive).ToList();
+            List<bool> actual = generation.BuildNextGeneration(input).Select(cell => cell.IsAlive).ToList();
             
             Assert.Equal(expected, actual);
         }
@@ -25,11 +24,11 @@ namespace GoLTests
         {
             Rules rules = new Rules();
             Generation generation = new Generation(rules);
-            List<Cell> input = new List<Cell> {new Cell(true), new Cell(false), new Cell(true)};
+            List<Cell> expected = new List<Cell> {new Cell(true), new Cell(false), new Cell(true)};
             
-            generation.BuildNextGeneration(input);
+            List<Cell> actual = generation.BuildNextGeneration(expected);
             
-            Assert.Equal(input, generation.NextGeneration);
+            Assert.Equal(expected, actual);
         }
     }
 }

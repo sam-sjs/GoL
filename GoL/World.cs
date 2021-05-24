@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace GoL
 {
     public class World
@@ -22,7 +25,12 @@ namespace GoL
             AssociateCellsWithNeighbours();
         }
 
-        public void SetLivingCellAtLocation(WorldLocation location)
+        public List<Cell> GetCellsInFormation()
+        {
+            return CellFormation.Cast<Cell>().ToList();
+        }
+
+        public void SetLivingCellAtLocation(Location location)
         {
             CellFormation[location.Row, location.Column].IsAlive = true;
         }
