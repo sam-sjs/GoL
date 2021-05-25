@@ -80,15 +80,16 @@ namespace GoL
 
         private void StartGame()
         {
-            ConsoleKey input;
             do
             {
-                // input = _input.ReadKey().Key;
-                List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
-                _world.SetNewCellFormation(nextGeneration);
-                _display.RefreshWorld(_world);
-                Thread.Sleep(1000);
-            } while (true);
+                while (!Console.KeyAvailable)
+                {
+                    List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
+                    _world.SetNewCellFormation(nextGeneration);
+                    _display.RefreshWorld(_world);
+                    Thread.Sleep(1000);
+                }
+            } while (_input.ReadKey().Key != ConsoleKey.Q);
         }
     }
 }
