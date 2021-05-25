@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace GoL
 {
@@ -30,6 +31,7 @@ namespace GoL
             _display.World(_world);
             _display.ResetCursorPosition();
             SetInitialWorldState();
+            StartGame();
         }
 
         private void CreateWorld()
@@ -81,9 +83,12 @@ namespace GoL
             ConsoleKey input;
             do
             {
-                input = _input.ReadKey().Key;
-                List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCellsInFormation());
-            } while (input != ConsoleKey.Q);
+                // input = _input.ReadKey().Key;
+                List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
+                _world.SetNewCellFormation(nextGeneration);
+                _display.RefreshWorld(_world);
+                Thread.Sleep(1000);
+            } while (true);
         }
     }
 }

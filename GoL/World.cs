@@ -25,9 +25,28 @@ namespace GoL
             AssociateCellsWithNeighbours();
         }
 
-        public List<Cell> GetCellsInFormation()
+        public List<Cell> GetCurrentCellFormation()
         {
             return CellFormation.Cast<Cell>().ToList();
+        }
+
+        public void SetNewCellFormation(List<Cell> cellFormation)
+        {
+            int currentRow = 0;
+            int currentCol = 0;
+            foreach (Cell cell in cellFormation)
+            {
+                CellFormation[currentCol, currentRow] = cell; // Not super confident this is the correct way around.
+                if (currentRow < _rows - 1)
+                {
+                    currentRow++;
+                }
+                else
+                {
+                    currentCol++;
+                    currentRow = 0;
+                }
+            }
         }
 
         public void SetLivingCellAtLocation(Location location)

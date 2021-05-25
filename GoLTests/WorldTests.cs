@@ -110,7 +110,37 @@ namespace GoLTests
                 world.CellFormation[2, 0], world.CellFormation[2, 1], world.CellFormation[2, 2]
             };
 
-            List<Cell> actual = world.GetCellsInFormation();
+            List<Cell> actual = world.GetCurrentCellFormation();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SetNewCellFormation_ShouldUpdateFormationInCorrectPositions()
+        {
+            World world = new World(3, 3);
+            world.Populate();
+            List<Cell> input = new List<Cell>
+            {
+                new Cell(false), new Cell(true), new Cell(false),
+                new Cell(true), new Cell(false), new Cell(true),
+                new Cell(false), new Cell(false), new Cell(true)
+            };
+            Cell[,] expected = new Cell[,]
+            {
+                {
+                    input[0], input[1], input[2]
+                },
+                {
+                    input[3], input[4], input[5]
+                },
+                {
+                    input[6], input[7], input[8]
+                }
+            };
+
+            world.SetNewCellFormation(input);
+            Cell[,] actual = world.CellFormation;
 
             Assert.Equal(expected, actual);
         }
