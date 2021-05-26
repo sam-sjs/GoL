@@ -1,4 +1,3 @@
-
 namespace GoL
 {
     public class Rules

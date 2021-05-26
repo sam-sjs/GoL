@@ -9,7 +9,7 @@ namespace GoL
             Column = column;
             Row = row;
         }
-        
+
         public int Column { get; }
         public int Row { get; }
 

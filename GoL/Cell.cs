@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace GoL
     {
         public Cell(bool isAlive)
         {
-            IsAlive = isAlive; 
+            IsAlive = isAlive;
         }
 
         public bool IsAlive { get; set; }

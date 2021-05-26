@@ -35,7 +35,7 @@ namespace GoL
         {
             _output.WriteLine(world.ToString());
         }
-        
+
         public void InvalidInput()
         {
             _output.WriteLine(Messages.InvalidInput);
@@ -44,6 +44,11 @@ namespace GoL
         public void Clear()
         {
             _output.Clear();
+        }
+
+        public void SetCursorPosition(int left, int top)
+        {
+            _output.SetCursorPosition(left, top);
         }
 
         public void ResetCursorPosition()

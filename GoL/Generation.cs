@@ -11,8 +11,6 @@ namespace GoL
             _rules = rules;
         }
 
-        // public List<Cell> NextGeneration { get; } = new List<Cell>();
-        
         public List<Cell> BuildNextGeneration(List<Cell> currentGeneration)
         {
             List<Cell> nextGeneration = new List<Cell>();
@@ -27,9 +25,9 @@ namespace GoL
 
         private bool IsCellAliveInNextGeneration(Cell cell)
         {
-            return cell.IsAlive ?
-                _rules.DoesCellHaveEnoughNeighboursToStayAlive(cell) :
-                _rules.DoesCellHaveEnoughNeighboursToComeToLife(cell);
+            return cell.IsAlive
+                ? _rules.DoesCellHaveEnoughNeighboursToStayAlive(cell)
+                : _rules.DoesCellHaveEnoughNeighboursToComeToLife(cell);
         }
     }
 }

@@ -10,9 +10,11 @@ namespace GoL
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
-        private readonly ConsoleKey[] _arrowKeys = new ConsoleKey[]
-            {ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow}; 
         private World _world;
+
+        private readonly ConsoleKey[] _arrowKeys = new ConsoleKey[]
+            {ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow};
+
 
         public GameEngine(Display display, IInput input)
         {
@@ -62,13 +64,82 @@ namespace GoL
                 input = _input.ReadKey().Key;
                 if (_arrowKeys.Contains(input))
                 {
-                    _display.MoveCursor(input);
+                    NavigateDisplay(input);
                 }
+
                 if (input == ConsoleKey.Spacebar)
                 {
                     SetLivingCell();
                 }
             } while (input != ConsoleKey.Enter);
+        }
+
+        private void NavigateDisplay(ConsoleKey input)
+        {
+            Location cursorPosition = _display.GetCursorPosition();
+            switch (input)
+            {
+                case ConsoleKey.UpArrow:
+                    MoveCursorUp(cursorPosition);
+                    break;
+                case ConsoleKey.DownArrow:
+                    MoveCursorDown(cursorPosition);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    MoveCursorLeft(cursorPosition);
+                    break;
+                case ConsoleKey.RightArrow:
+                    MoveCursorRight(cursorPosition);
+                    break;
+            }
+        }
+
+        private void MoveCursorUp(Location cursorPosition)
+        {
+            if (cursorPosition.Row == 0)
+            {
+                _display.SetCursorPosition(cursorPosition.Column, _world.Rows - 1);
+            }
+            else
+            {
+                _display.SetCursorPosition(cursorPosition.Column, cursorPosition.Row - 1);
+            }
+        }
+
+        private void MoveCursorDown(Location cursorPosition)
+        {
+            if (cursorPosition.Row == _world.Rows - 1)
+            {
+                _display.SetCursorPosition(cursorPosition.Column, 0);
+            }
+            else
+            {
+                _display.SetCursorPosition(cursorPosition.Column, cursorPosition.Row + 1);
+            }
+        }
+
+        private void MoveCursorLeft(Location cursorPosition)
+        {
+            if (cursorPosition.Column == 0)
+            {
+                _display.SetCursorPosition(_world.Columns - 1, cursorPosition.Row);
+            }
+            else
+            {
+                _display.SetCursorPosition(cursorPosition.Column - 1, cursorPosition.Row);
+            }
+        }
+
+        private void MoveCursorRight(Location cursorPosition)
+        {
+            if (cursorPosition.Column == _world.Columns - 1)
+            {
+                _display.SetCursorPosition(0, cursorPosition.Row);
+            }
+            else
+            {
+                _display.SetCursorPosition(cursorPosition.Column + 1, cursorPosition.Row);
+            }
         }
 
         private void SetLivingCell() // Name is very similar to World method.
