@@ -14,10 +14,10 @@ namespace GoL
         public List<Cell> BuildNextGeneration(List<Cell> currentGeneration)
         {
             List<Cell> nextGeneration = new List<Cell>();
-            foreach (Cell cell in currentGeneration)
+            foreach (Cell currentCell in currentGeneration)
             {
-                cell.IsAlive = IsCellAliveInNextGeneration(cell);
-                nextGeneration.Add(cell);
+                Cell newCell = new Cell(IsCellAliveInNextGeneration(currentCell));
+                nextGeneration.Add(newCell);
             }
 
             return nextGeneration;

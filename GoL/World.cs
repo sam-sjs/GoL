@@ -6,20 +6,51 @@ namespace GoL
 {
     public class World
     {
-        public World(int rows, int columns)
+        public World(int columns, int rows)
         {
-            Rows = rows;
             Columns = columns;
-            CellFormation = new Cell[Rows, Columns];
+            Rows = rows;
+            CellFormation = new Cell[Columns, Rows];
             FillWorldWithCells();
             AssociateCellsWithNeighbours();
         }
 
-        // TODO Double check this array builds around the right way or at least that row/column are identified
-        // correctly.  Out of alignment with x/y of display/worldlocation.
         public readonly Cell[,] CellFormation;
-        public int Rows { get; }
         public int Columns { get; }
+        public int Rows { get; }
+
+        private void FillWorldWithCells()
+        {
+            for (int row = 0; row < Rows; row++)
+            {
+                for (int column = 0; column < Columns; column++)
+                {
+                    CellFormation[column, row] = new Cell(false);
+                }
+            }
+        }
+
+        private void AssociateCellsWithNeighbours()
+        {
+            for (int row = 0; row < Rows; row++)
+            {
+                for (int column = 0; column < Columns; column++)
+                {
+                    int top = row > 0 ? row - 1 : Rows - 1;
+                    int bottom = row < Rows - 1 ? row + 1 : 0;
+                    int left = column > 0 ? column - 1 : Columns - 1;
+                    int right = column < Columns - 1 ? column + 1 : 0;
+                    CellFormation[column, row].Neighbours.Add(CellFormation[left, top]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[column, top]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[right, top]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[left, row]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[right, row]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[left, bottom]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[column, bottom]);
+                    CellFormation[column, row].Neighbours.Add(CellFormation[right, bottom]);
+                }
+            }
+        }
 
         public List<Cell> GetCurrentCellFormation()
         {
@@ -28,11 +59,11 @@ namespace GoL
 
         public void SetNewCellFormation(List<Cell> cellFormation)
         {
-            int currentRow = 0;
             int currentCol = 0;
+            int currentRow = 0;
             foreach (Cell cell in cellFormation)
             {
-                CellFormation[currentCol, currentRow] = cell; // Not super confident this is the correct way around.
+                CellFormation[currentCol, currentRow] = cell;
                 if (currentRow < Rows - 1)
                 {
                     currentRow++;
@@ -43,60 +74,28 @@ namespace GoL
                     currentRow = 0;
                 }
             }
+            AssociateCellsWithNeighbours();
         }
 
         public void SetLivingCellAtLocation(Location location)
         {
-            CellFormation[location.Row, location.Column].IsAlive = true;
+            CellFormation[location.Column, location.Row].IsAlive = true;
         }
 
         public override string ToString()
         {
             string toDisplay = "";
-            for (int i = 0; i < Rows; i++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int j = 0; j < Columns; j++)
+                for (int column = 0; column < Columns; column++)
                 {
-                    toDisplay += CellFormation[i, j];
+                    toDisplay += CellFormation[column, row];
                 }
 
-                if (i < Columns - 1) toDisplay += "\n";
+                if (row < Rows - 1) toDisplay += "\n";
             }
 
             return toDisplay;
-        }
-
-        private void FillWorldWithCells()
-        {
-            for (int i = 0; i < Rows; i++)
-            {
-                for (int j = 0; j < Columns; j++)
-                {
-                    CellFormation[i, j] = new Cell(false);
-                }
-            }
-        }
-
-        private void AssociateCellsWithNeighbours()
-        {
-            for (int i = 0; i < Rows; i++)
-            {
-                for (int j = 0; j < Columns; j++)
-                {
-                    int top = i > 0 ? i - 1 : Rows - 1;
-                    int bottom = i < Rows - 1 ? i + 1 : 0;
-                    int left = j > 0 ? j - 1 : Columns - 1;
-                    int right = j < Columns - 1 ? j + 1 : 0;
-                    CellFormation[i, j].Neighbours.Add(CellFormation[top, left]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[top, j]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[top, right]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[i, left]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[i, right]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, left]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, j]);
-                    CellFormation[i, j].Neighbours.Add(CellFormation[bottom, right]);
-                }
-            }
         }
     }
 }

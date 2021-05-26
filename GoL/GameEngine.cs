@@ -38,16 +38,16 @@ namespace GoL
             _display.Clear();
             _display.World(_world);
             _display.ResetCursorPosition();
-            SetInitialWorldState();
+            GetInitialLivingCellsFromUser();
         }
 
         private void CreateWorld()
         {
-            _display.EnterHeight();
-            int worldHeight = GetValidWorldDimensionFromUser();
             _display.EnterWidth();
             int worldWidth = GetValidWorldDimensionFromUser();
-            _world = new World(worldHeight, worldWidth);
+            _display.EnterHeight();
+            int worldHeight = GetValidWorldDimensionFromUser();
+            _world = new World(worldWidth, worldHeight);
         }
 
         private int GetValidWorldDimensionFromUser()
@@ -61,7 +61,8 @@ namespace GoL
             return dimension;
         }
 
-        private void SetInitialWorldState() // Potentially rename this.
+        private void GetInitialLivingCellsFromUser()
+        // Bad name, this processes user display input or something
         {
             ConsoleKey input;
             do
@@ -69,7 +70,7 @@ namespace GoL
                 input = _input.ReadKey().Key;
                 if (_arrowKeys.Contains(input))
                 {
-                    NavigateDisplay(input);
+                    ProcessDisplayNavigationalInput(input);
                 }
 
                 if (input == ConsoleKey.Spacebar)
@@ -79,7 +80,7 @@ namespace GoL
             } while (input != ConsoleKey.Enter);
         }
 
-        private void NavigateDisplay(ConsoleKey input)
+        private void ProcessDisplayNavigationalInput(ConsoleKey input)
         {
             Location cursorPosition = _display.GetCursorPosition();
             switch (input)
@@ -147,7 +148,8 @@ namespace GoL
             }
         }
 
-        private void SetLivingCell() // Name is very similar to World method.
+        private void SetLivingCell()
+        // Rename - this sends the cursor position as a living cell to the world
         {
             Location livingCell = _display.GetCursorPosition();
             _world.SetLivingCellAtLocation(livingCell);

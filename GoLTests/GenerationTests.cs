@@ -20,15 +20,16 @@ namespace GoLTests
         }
 
         [Fact]
-        public void BuildNextGeneration_ShouldNotCreateNewInstanceOfCells()
+        public void BuildNextGeneration_ShouldCreateNewInstanceOfCells()
+        // This test is kind of stupid now, think of something better.
         {
             Rules rules = new Rules();
             Generation generation = new Generation(rules);
-            List<Cell> expected = new List<Cell> {new Cell(true), new Cell(false), new Cell(true)};
+            List<Cell> input = new List<Cell> {new Cell(true), new Cell(false), new Cell(true)};
             
-            List<Cell> actual = generation.BuildNextGeneration(expected);
+            List<Cell> output = generation.BuildNextGeneration(input);
             
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(input, output);
         }
     }
 }

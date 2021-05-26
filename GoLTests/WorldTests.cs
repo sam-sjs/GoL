@@ -49,9 +49,9 @@ namespace GoLTests
             Cell cellToTest = world.CellFormation[2, 2];
             List<Cell> expected = new List<Cell>
             {
-                world.CellFormation[1, 1], world.CellFormation[1, 2], world.CellFormation[1, 3],
-                world.CellFormation[2, 1], world.CellFormation[2, 3],
-                world.CellFormation[3, 1], world.CellFormation[3, 2], world.CellFormation[3, 3]
+                world.CellFormation[1, 1], world.CellFormation[2, 1], world.CellFormation[3, 1],
+                world.CellFormation[1, 2], world.CellFormation[3, 2],
+                world.CellFormation[1, 3], world.CellFormation[2, 3], world.CellFormation[3, 3]
             };
             
             Assert.Equal(expected, cellToTest.Neighbours);
@@ -59,7 +59,7 @@ namespace GoLTests
 
         [Theory]
         [InlineData(false, ".....\n.....\n.....\n.....\n.....")]
-        [InlineData(true, ".....\n...#.\n.....\n.....\n.....")]
+        [InlineData(true, ".....\n.....\n.....\n.#...\n.....")]
         public void AWorld_ShouldHaveTheCorrectStringRepresentation(bool cellAlive, string expected)
         {
             World world = new World(5, 5);
@@ -76,9 +76,9 @@ namespace GoLTests
             World world = new World(5, 5);
             Location location = new Location(2, 3);
 
-            bool initialState = world.CellFormation[3, 2].IsAlive;
+            bool initialState = world.CellFormation[location.Column, location.Row].IsAlive;
             world.SetLivingCellAtLocation(location);
-            bool newState = world.CellFormation[3, 2].IsAlive;
+            bool newState = world.CellFormation[location.Column, location.Row].IsAlive;
             
             Assert.False(initialState);
             Assert.True(newState);

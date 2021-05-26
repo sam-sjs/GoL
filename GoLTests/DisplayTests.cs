@@ -79,25 +79,6 @@ namespace GoLTests
             Assert.Equal(message, output.Message);
         }
 
-        [Theory]
-        [InlineData(ConsoleKey.UpArrow, 2, 1)]
-        [InlineData(ConsoleKey.DownArrow, 2, 3)]
-        [InlineData(ConsoleKey.LeftArrow, 1, 2)]
-        [InlineData(ConsoleKey.RightArrow, 3, 2)]
-        public void MoveCursor_ShouldMoveCursorInGivenDirection(ConsoleKey input, int expectedLeft, int expectedTop)
-        {
-            TestOutput output = new TestOutput();
-            Display display = new Display(output);
-            output.SetCursorPosition(2, 2);
-            
-            display.MoveCursor(input);
-            int actualLeft = output.CursorLeft;
-            int actualTop = output.CursorTop;
-            
-            Assert.Equal(expectedLeft, actualLeft);
-            Assert.Equal(expectedTop, actualTop);
-        }
-
         [Fact]
         public void Clear_ShouldRemoveAllMessagesFromDisplay()
         {
