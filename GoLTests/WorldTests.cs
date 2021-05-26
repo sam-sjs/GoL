@@ -8,33 +8,33 @@ namespace GoLTests
     public class WorldTests
     {
         [Fact]
-        public void ANewWorld_ShouldBeEmptyOfCells()
+        public void ANewWorld_ShouldContainTheCorrectNumberOfCells()
         {
-            World world = new World(1, 1);
+            World world = new World(3, 3);
+            int expected = 9;
 
-            IEnumerable<Cell> cellFormation = world.CellFormation.Cast<Cell>();
-            bool noCellsInFormation = cellFormation.All(cell => cell == null);
-
-            Assert.True(noCellsInFormation);
+            int actual = world.CellFormation.Length;
+            
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
-        public void Populate_ShouldPopulateA2dArrayWithCells()
+        public void ANewWorld_ShouldContainOnlyDeadCells()
         {
             World world = new World(3, 3);
 
-            world.Populate();
-            
-            Assert.NotEmpty(world.CellFormation);
+            List<Cell> cellsAsList = world.CellFormation.Cast<Cell>().ToList();
+            bool allDeadCells = cellsAsList.All(cell => cell.IsAlive == false);
+
+            Assert.True(allDeadCells);
         }
 
         [Fact]
-        public void Populate_ShouldAssociateEachCellWith8Neighbours()
+        public void CellsInWorld_ShouldBeAssigned8Neighbours()
         {
             World world = new World(5, 5);
             int expected = 8;
 
-            world.Populate();
             Cell cellToTest = world.CellFormation[1, 1];
             int actual = cellToTest.Neighbours.Count;
             
@@ -42,11 +42,10 @@ namespace GoLTests
         }
 
         [Fact]
-        public void Populate_ShouldAssociateCellWithCorrectNeighbours()
+        public void CellsInWorld_ShouldBeAssociatedWithCorrectNeighbours()
         {
             World world = new World(5, 5);
 
-            world.Populate();
             Cell cellToTest = world.CellFormation[2, 2];
             List<Cell> expected = new List<Cell>
             {
@@ -58,37 +57,24 @@ namespace GoLTests
             Assert.Equal(expected, cellToTest.Neighbours);
         }
 
-        [Fact]
-        public void ANewWorld_ShouldNoLongerBeEmptyAfterAddingACell()
+        [Theory]
+        [InlineData(false, ".....\n.....\n.....\n.....\n.....")]
+        [InlineData(true, ".....\n...#.\n.....\n.....\n.....")]
+        public void AWorld_ShouldHaveTheCorrectStringRepresentation(bool cellAlive, string expected)
         {
-            World world = new World(2, 2);
-
-            world.Populate();
-
-            IEnumerable<Cell> cellFormation = world.CellFormation.Cast<Cell>();
-            bool worldIsNotEmpty = cellFormation.All(cell => cell != null);
-
-            Assert.True(worldIsNotEmpty);
-        }
-
-        [Fact]
-        public void AWorld_ShouldHaveTheCorrectStringRepresentation()
-        {   // Think if there is a way to do this without Populate() - also could use a test with living cell
             World world = new World(5, 5);
-            world.Populate();
-            string expected = ".....\n.....\n.....\n.....\n.....";
-
+            world.CellFormation[1, 3].IsAlive = cellAlive;
+            
             string actual = world.ToString();
             
             Assert.Equal(expected, actual);
         }
 
         [Fact]
-        public void SetLivingCellAtLocation_ShouldUpdateTheCorrectCellToAlive()
-        {   // As above consider whether there is a way to do this without Populate()
+        public void SetLivingCellAtLocation_ShouldUpdateTheCorrectCellToAlive() // Split to two tests?
+        {                                                        // Or add under test that checks all cells start dead
             World world = new World(5, 5);
             Location location = new Location(2, 3);
-            world.Populate();
 
             bool initialState = world.CellFormation[3, 2].IsAlive;
             world.SetLivingCellAtLocation(location);
@@ -102,7 +88,6 @@ namespace GoLTests
         public void GetCellsInFormation_ShouldReturnAFlattenedListOfCells()
         {
             World world = new World(3, 3);
-            world.Populate();
             List<Cell> expected = new List<Cell>
             {
                 world.CellFormation[0, 0], world.CellFormation[0, 1], world.CellFormation[0, 2],
@@ -116,10 +101,9 @@ namespace GoLTests
         }
 
         [Fact]
-        public void SetNewCellFormation_ShouldUpdateFormationInCorrectPositions()
+        public void SetNewCellFormation_ShouldSetCellsInCorrectPositions()
         {
             World world = new World(3, 3);
-            world.Populate();
             List<Cell> input = new List<Cell>
             {
                 new Cell(false), new Cell(true), new Cell(false),

@@ -7,6 +7,7 @@ namespace GoL
 {
     public class GameEngine
     {
+        private const int RefreshWorldDelay = 1000;
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
@@ -27,25 +28,29 @@ namespace GoL
         public void Run()
         {
             _display.WelcomeMessage();
+            SetupWorld();
+            StartGame();
+        }
+
+        private void SetupWorld()
+        {
             CreateWorld();
-            _world.Populate();
             _display.Clear();
             _display.World(_world);
             _display.ResetCursorPosition();
             SetInitialWorldState();
-            StartGame();
         }
 
         private void CreateWorld()
         {
             _display.EnterHeight();
-            int worldHeight = GetValidWorldDimension();
+            int worldHeight = GetValidWorldDimensionFromUser();
             _display.EnterWidth();
-            int worldWidth = GetValidWorldDimension();
+            int worldWidth = GetValidWorldDimensionFromUser();
             _world = new World(worldHeight, worldWidth);
         }
 
-        private int GetValidWorldDimension() // From user?
+        private int GetValidWorldDimensionFromUser()
         {
             int dimension;
             while (!int.TryParse(_input.ReadLine(), out dimension))
@@ -146,7 +151,7 @@ namespace GoL
         {
             Location livingCell = _display.GetCursorPosition();
             _world.SetLivingCellAtLocation(livingCell);
-            _display.RefreshWorld(_world);
+            _display.RefreshWorld(_world); // Second thing the method is doing?
         }
 
         private void StartGame()
@@ -154,11 +159,11 @@ namespace GoL
             do
             {
                 while (!Console.KeyAvailable)
-                {
+                {   // Below line needs method renaming.
                     List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
                     _world.SetNewCellFormation(nextGeneration);
+                    Thread.Sleep(RefreshWorldDelay);
                     _display.RefreshWorld(_world);
-                    Thread.Sleep(1000);
                 }
             } while (_input.ReadKey().Key != ConsoleKey.Q);
         }

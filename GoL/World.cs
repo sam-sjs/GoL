@@ -11,6 +11,8 @@ namespace GoL
             Rows = rows;
             Columns = columns;
             CellFormation = new Cell[Rows, Columns];
+            FillWorldWithCells();
+            AssociateCellsWithNeighbours();
         }
 
         // TODO Double check this array builds around the right way or at least that row/column are identified
@@ -18,12 +20,6 @@ namespace GoL
         public readonly Cell[,] CellFormation;
         public int Rows { get; }
         public int Columns { get; }
-
-        public void Populate() // Consider putting this in the constructor once decided how to handle initial world setup.
-        {
-            FillWorldWithCells();
-            AssociateCellsWithNeighbours();
-        }
 
         public List<Cell> GetCurrentCellFormation()
         {
