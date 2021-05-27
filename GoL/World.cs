@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GoL
 {
@@ -84,18 +85,18 @@ namespace GoL
 
         public override string ToString()
         {
-            string toDisplay = "";
+            StringBuilder toDisplay = new StringBuilder(Rows * Columns + (Rows - 1));
             for (int row = 0; row < Rows; row++)
             {
                 for (int column = 0; column < Columns; column++)
                 {
-                    toDisplay += CellFormation[column, row];
+                    toDisplay.Append(CellFormation[column, row]);
                 }
 
-                if (row < Rows - 1) toDisplay += "\n";
+                if (row < Rows - 1) toDisplay.Append('\n');
             }
 
-            return toDisplay;
+            return toDisplay.ToString();
         }
     }
 }
