@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoL
 {
-    public class World
+    public class World : IInhabitable
     {
         public World(int columns, int rows)
         {

@@ -18,9 +18,9 @@ namespace GoL
             return Neighbours.Count(cell => cell.IsAlive);
         }
 
-        public override string ToString() // See if I can use a better char for alive and maybe space for dead
+        public override string ToString() // This should maybe be handled in the console output
         {
-            return IsAlive ? "#" : ".";
+            return IsAlive ? "██" : "..";
         }
     }
 }
