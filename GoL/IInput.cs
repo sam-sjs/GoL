@@ -5,6 +5,6 @@ namespace GoL
     public interface IInput
     {
         public string ReadLine();
-        public ConsoleKeyInfo ReadKey();
+        public Key ReadKey();
     }
 }

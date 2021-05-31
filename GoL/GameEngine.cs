@@ -13,8 +13,7 @@ namespace GoL
         private readonly Generation _generation;
         private World _world;
 
-        private readonly ConsoleKey[] _arrowKeys = new ConsoleKey[]
-            {ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow};
+        private readonly Key[] _arrowKeys = new Key[] {Key.Right, Key.Left, Key.Up, Key.Down};
 
 
         public GameEngine(Display display, IInput input)
@@ -64,37 +63,37 @@ namespace GoL
         private void GetInitialLivingCellsFromUser()
         // Bad name, this processes user display input or something
         {
-            ConsoleKey input;
+            Key input;
             do
             {
-                input = _input.ReadKey().Key;
+                input = _input.ReadKey();
                 if (_arrowKeys.Contains(input))
                 {
                     ProcessDisplayNavigationalInput(input);
                 }
 
-                if (input == ConsoleKey.Spacebar)
+                if (input == Key.Space)
                 {
                     SetLivingCell();
                 }
-            } while (input != ConsoleKey.Enter);
+            } while (input != Key.Enter);
         }
 
-        private void ProcessDisplayNavigationalInput(ConsoleKey input)
+        private void ProcessDisplayNavigationalInput(Key input)
         {
             Location cursorPosition = _display.GetCursorPosition();
             switch (input)
             {
-                case ConsoleKey.UpArrow:
+                case Key.Up:
                     MoveCursorUp(cursorPosition);
                     break;
-                case ConsoleKey.DownArrow:
+                case Key.Down:
                     MoveCursorDown(cursorPosition);
                     break;
-                case ConsoleKey.LeftArrow:
+                case Key.Left:
                     MoveCursorLeft(cursorPosition);
                     break;
-                case ConsoleKey.RightArrow:
+                case Key.Right:
                     MoveCursorRight(cursorPosition);
                     break;
             }
@@ -167,7 +166,7 @@ namespace GoL
                     Thread.Sleep(RefreshWorldDelay);
                     _display.RefreshWorld(_world);
                 }
-            } while (_input.ReadKey().Key != ConsoleKey.Q);
+            } while (_input.ReadKey() != Key.Quit);
         }
     }
 }

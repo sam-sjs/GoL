@@ -58,8 +58,8 @@ namespace GoLTests
         }
 
         [Theory]
-        [InlineData(false, ".....\n.....\n.....\n.....\n.....")]
-        [InlineData(true, ".....\n.....\n.....\n.#...\n.....")]
+        [InlineData(false, "..........\n..........\n..........\n..........\n..........")]
+        [InlineData(true, "..........\n..........\n..........\n..██......\n..........")]
         public void AWorld_ShouldHaveTheCorrectStringRepresentation(bool cellAlive, string expected)
         {
             World world = new World(5, 5);

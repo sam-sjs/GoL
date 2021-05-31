@@ -19,9 +19,9 @@ namespace GoLTests
             return (string) _inputs[_timesCalled++];
         }
 
-        public ConsoleKeyInfo ReadKey()
+        public Key ReadKey()
         {
-            return (ConsoleKeyInfo) _inputs[_timesCalled++];
+            return (Key) _inputs[_timesCalled++];
         }
     }
 }

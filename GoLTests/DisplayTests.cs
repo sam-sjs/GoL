@@ -60,7 +60,7 @@ namespace GoLTests
             World world = new World(5, 5);
             TestOutput output = new TestOutput();
             Display display = new Display(output);
-            string message = ".....\n.....\n.....\n.....\n.....";
+            string message = "..........\n..........\n..........\n..........\n..........";
 
             display.World(world);
             

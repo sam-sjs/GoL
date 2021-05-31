@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using System.Collections.Generic;
+using GoL;
 
 namespace GoLTests
 {
@@ -23,12 +24,12 @@ namespace GoLTests
         {
             List<object> inputs = new List<object>
             {
-                new ConsoleKeyInfo('Q', ConsoleKey.Q, false, false, false)
+                Key.Quit
             };
             TestInput input = new TestInput(inputs);
-            ConsoleKeyInfo expected = new ConsoleKeyInfo('Q', ConsoleKey.Q, false, false, false);
+            Key expected = Key.Quit;
 
-            ConsoleKeyInfo actual = input.ReadKey();
+            Key actual = input.ReadKey();
 
             Assert.Equal(expected, actual);
         }
