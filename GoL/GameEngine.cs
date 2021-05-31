@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 
@@ -11,7 +12,7 @@ namespace GoL
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
-        private World _world;
+        private IInhabitable _world;
 
         private readonly Key[] _arrowKeys = new Key[] {Key.Right, Key.Left, Key.Up, Key.Down};
 
@@ -20,10 +21,11 @@ namespace GoL
         {
             _display = display;
             _input = input;
-            Rules rules = new Rules();
+            IRenewable rules = new Rules();
             _generation = new Generation(rules);
         }
 
+        [SuppressMessage("ReSharper.DPA", "DPA0001: Memory allocation issues")]
         public void Run()
         {
             _display.WelcomeMessage();
@@ -127,11 +129,11 @@ namespace GoL
         {
             if (cursorPosition.Column == 0)
             {
-                _display.SetCursorPosition(_world.Columns - 1, cursorPosition.Row);
+                _display.SetCursorPosition(_world.Columns - 2, cursorPosition.Row);
             }
             else
             {
-                _display.SetCursorPosition(cursorPosition.Column - 1, cursorPosition.Row);
+                _display.SetCursorPosition(cursorPosition.Column - 2, cursorPosition.Row);
             }
         }
 
@@ -143,7 +145,7 @@ namespace GoL
             }
             else
             {
-                _display.SetCursorPosition(cursorPosition.Column + 1, cursorPosition.Row);
+                _display.SetCursorPosition(cursorPosition.Column + 2, cursorPosition.Row); // The movement offsets can be in Display (via output?)
             }
         }
 

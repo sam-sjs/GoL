@@ -30,7 +30,7 @@ namespace GoL
             _output.WriteLine(Messages.SetInitialState);
         }
 
-        public void World(World world)
+        public void World(IInhabitable world)
         {
             _output.WriteLine(world.ToString());
         }
@@ -60,7 +60,7 @@ namespace GoL
             return new Location(_output.CursorLeft, _output.CursorTop);
         }
 
-        public void RefreshWorld(World world)
+        public void RefreshWorld(IInhabitable world)
         {
             int cursorLeft = _output.CursorLeft;
             int cursorTop = _output.CursorTop;

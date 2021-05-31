@@ -4,9 +4,9 @@ namespace GoL
 {
     public class Generation
     {
-        private readonly Rules _rules;
+        private readonly IRenewable _rules;
 
-        public Generation(Rules rules)
+        public Generation(IRenewable rules)
         {
             _rules = rules;
         }

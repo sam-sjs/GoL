@@ -1,6 +1,6 @@
 namespace GoL
 {
-    public class Rules
+    public class Rules : IRenewable
     {
         private const int CellSurvivesLowerCount = 2;
         private const int CellSurvivesUpperCount = 3;
