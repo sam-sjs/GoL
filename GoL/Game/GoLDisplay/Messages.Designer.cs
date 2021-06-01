@@ -28,7 +28,7 @@ namespace GoL {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("GoL.Messages", typeof(Messages).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("GoL.Game.GoLDisplay.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
