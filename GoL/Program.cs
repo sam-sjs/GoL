@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GoL.Game.GoLDisplay;
+using GoL.Game.GoLGameEngine;
+using GoL.Input;
+using GoL.Output;
 
 namespace GoL
 {
