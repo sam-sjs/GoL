@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GoL;
 using Xunit;
+using Moq;
 
 namespace GoLTests
 {
@@ -17,6 +18,34 @@ namespace GoLTests
             List<bool> actual = generation.BuildNextGeneration(input).Select(cell => cell.IsAlive).ToList();
             
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DoesCellHaveEnoughNeighboursToStayAlive_IsCalledOnEveryLivingCell()
+        {
+            Mock<IRenewable> mockRules = new Mock<IRenewable>();
+            Generation generation = new Generation(mockRules.Object);
+            List<Cell> input = new List<Cell> {new Cell(true), new Cell(true), new Cell(false), new Cell(true)};
+            int expectedCalls = 3;
+
+            generation.BuildNextGeneration(input);
+
+            mockRules.Verify(rules => rules.DoesCellHaveEnoughNeighboursToStayAlive(It.IsAny<Cell>()),
+                Times.Exactly(expectedCalls));
+        }
+        
+        [Fact]
+        public void DoesCellHaveEnoughNeighboursToComeToLife_IsCalledOnEveryDeadCell()
+        {
+            Mock<IRenewable> mockRules = new Mock<IRenewable>();
+            Generation generation = new Generation(mockRules.Object);
+            List<Cell> input = new List<Cell> {new Cell(true), new Cell(true), new Cell(false), new Cell(true)};
+            int expectedCalls = 1;
+
+            generation.BuildNextGeneration(input);
+
+            mockRules.Verify(rules => rules.DoesCellHaveEnoughNeighboursToComeToLife(It.IsAny<Cell>()),
+                Times.Exactly(expectedCalls));
         }
 
         [Fact]
