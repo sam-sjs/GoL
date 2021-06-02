@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using GoL.Game.GoLCell;
 using GoL.Game.GoLDisplay;
 
@@ -84,25 +83,18 @@ namespace GoL.Game.GoLWorld
             CellFormation[location.Column, location.Row].IsAlive = true;
         }
 
-        public bool IsCellAliveAtLocation(Location location)
+        public bool[,] GetCurrentWorldState()
         {
-            return CellFormation[location.Column, location.Row].IsAlive;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder toDisplay = new StringBuilder(Rows * Columns + (Rows - 1));
+            bool[,] worldState = new bool[Columns, Rows];
             for (int row = 0; row < Rows; row++)
             {
                 for (int column = 0; column < Columns; column++)
                 {
-                    toDisplay.Append(CellFormation[column, row]);
+                    worldState[column, row] = CellFormation[column, row].IsAlive;
                 }
-
-                if (row < Rows - 1) toDisplay.Append('\n');
             }
 
-            return toDisplay.ToString();
+            return worldState;
         }
     }
 }

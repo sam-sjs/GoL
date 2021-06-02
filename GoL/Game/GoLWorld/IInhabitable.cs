@@ -9,6 +9,7 @@ namespace GoL.Game.GoLWorld
         public int Rows { get; }
         public int Columns { get; }
         public List<Cell> GetCurrentCellFormation();
+        public bool[,] GetCurrentWorldState();
         public void SetLivingCellAtLocation(Location location);
         public void SetNewCellFormation(List<Cell> formation);
     }

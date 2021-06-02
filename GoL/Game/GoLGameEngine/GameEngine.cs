@@ -14,7 +14,7 @@ namespace GoL.Game.GoLGameEngine
 {
     public class GameEngine
     {
-        private const int RefreshWorldDelay = 1000;
+        private const int RefreshWorldDelay = 200;
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
@@ -85,6 +85,8 @@ namespace GoL.Game.GoLGameEngine
                     SetLivingCell();
                 }
             } while (input != Key.Enter);
+
+            Console.CursorVisible = false;
         }
 
         private void ProcessDisplayNavigationalInput(Key input)
@@ -135,11 +137,11 @@ namespace GoL.Game.GoLGameEngine
         {
             if (cursorPosition.Column == 0)
             {
-                _display.SetCursorPosition(_world.Columns - 2, cursorPosition.Row);
+                _display.SetCursorPosition(_world.Columns - 1, cursorPosition.Row);
             }
             else
             {
-                _display.SetCursorPosition(cursorPosition.Column - 2, cursorPosition.Row);
+                _display.SetCursorPosition(cursorPosition.Column - 1, cursorPosition.Row);
             }
         }
 
@@ -151,7 +153,7 @@ namespace GoL.Game.GoLGameEngine
             }
             else
             {
-                _display.SetCursorPosition(cursorPosition.Column + 2, cursorPosition.Row); // The movement offsets can be in Display (via output?)
+                _display.SetCursorPosition(cursorPosition.Column + 1, cursorPosition.Row);
             }
         }
 
@@ -175,6 +177,8 @@ namespace GoL.Game.GoLGameEngine
                     _display.RefreshWorld(_world);
                 }
             } while (_input.ReadKey() != Key.Quit);
+
+            Console.CursorVisible = true;
         }
     }
 }

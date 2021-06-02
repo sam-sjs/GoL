@@ -17,10 +17,5 @@ namespace GoL.Game.GoLCell
         {
             return Neighbours.Count(cell => cell.IsAlive);
         }
-
-        public override string ToString() // This should maybe be handled in the console output
-        {
-            return IsAlive ? "██" : "..";
-        }
     }
 }
