@@ -7,9 +7,25 @@ namespace GoLTests.Output
         public string Message;
         public int CursorLeft { get; set; }
         public int CursorTop { get; set; }
+        public int CellWriteWidth { get; } = 1;
+
+        public void WriteLine()
+        {
+            Message += "";
+        }
         public void WriteLine(string message)
         {
-            Message = message;
+            Message += message;
+        }
+
+        public void WriteLivingCell()
+        {
+            Message += "██";
+        }
+
+        public void WriteDeadCell()
+        {
+            Message += "..";
         }
 
         public void SetCursorPosition(int left, int top)

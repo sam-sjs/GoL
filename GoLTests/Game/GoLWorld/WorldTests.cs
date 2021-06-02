@@ -59,19 +59,6 @@ namespace GoLTests.Game.GoLWorld
             Assert.Equal(expected, cellToTest.Neighbours);
         }
 
-        [Theory]
-        [InlineData(false, "..........\n..........\n..........\n..........\n..........")]
-        [InlineData(true, "..........\n..........\n..........\n..██......\n..........")]
-        public void AWorld_ShouldHaveTheCorrectStringRepresentation(bool cellAlive, string expected)
-        {
-            World world = new World(5, 5);
-            world.CellFormation[1, 3].IsAlive = cellAlive;
-            
-            string actual = world.ToString();
-            
-            Assert.Equal(expected, actual);
-        }
-
         [Fact]
         public void SetLivingCellAtLocation_ShouldUpdateTheCorrectCellToAlive() // Split to two tests?
         {                                                        // Or add under test that checks all cells start dead
@@ -127,6 +114,19 @@ namespace GoLTests.Game.GoLWorld
 
             world.SetNewCellFormation(input);
             Cell[,] actual = world.CellFormation;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetCurrentWorldState_ReturnsABoolArrayRepresentingLivingCells()
+        {
+            World world = new World(3, 3);
+            Location location = new Location(1, 1);
+            world.SetLivingCellAtLocation(location);
+            bool[,] expected = new bool[,] {{false, false, false}, {false, true, false}, {false, false, false}};
+
+            bool[,] actual = world.GetCurrentWorldState();
 
             Assert.Equal(expected, actual);
         }
