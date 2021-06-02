@@ -84,6 +84,11 @@ namespace GoL.Game.GoLWorld
             CellFormation[location.Column, location.Row].IsAlive = true;
         }
 
+        public bool IsCellAliveAtLocation(Location location)
+        {
+            return CellFormation[location.Column, location.Row].IsAlive;
+        }
+
         public override string ToString()
         {
             StringBuilder toDisplay = new StringBuilder(Rows * Columns + (Rows - 1));
