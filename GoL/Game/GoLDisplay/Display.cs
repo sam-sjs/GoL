@@ -84,9 +84,14 @@ namespace GoL.Game.GoLDisplay
         {
             int cursorLeft = _output.CursorLeft;
             int cursorTop = _output.CursorTop;
-            Clear();
+            ResetCursorPosition();
             World(world);
             _output.SetCursorPosition(cursorLeft, cursorTop);
+        }
+
+        public void ShowCursor(bool showCursor)
+        {
+            _output.CursorVisible = showCursor;
         }
     }
 }

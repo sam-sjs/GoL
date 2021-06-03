@@ -7,6 +7,7 @@ namespace GoLTests.Output
         public string Message;
         public int CursorLeft { get; set; }
         public int CursorTop { get; set; }
+        public bool CursorVisible { get; set; }
         public int CellWriteWidth { get; } = 1;
 
         public void WriteLine()

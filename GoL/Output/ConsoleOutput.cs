@@ -10,6 +10,11 @@ namespace GoL.Output
         public int CursorLeft { get; set; }
         public int CursorTop { get; set; }
 
+        public bool CursorVisible
+        {
+            get => Console.CursorVisible;
+            set => Console.CursorVisible = value;
+        }
         public void WriteLine()
         {
             Console.WriteLine();

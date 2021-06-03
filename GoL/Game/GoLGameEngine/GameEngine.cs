@@ -86,7 +86,7 @@ namespace GoL.Game.GoLGameEngine
                 }
             } while (input != Key.Enter);
 
-            Console.CursorVisible = false;
+            _display.ShowCursor(false);
         }
 
         private void ProcessDisplayNavigationalInput(Key input)
@@ -178,7 +178,7 @@ namespace GoL.Game.GoLGameEngine
                 }
             } while (_input.ReadKey() != Key.Quit);
 
-            Console.CursorVisible = true;
+            _display.ShowCursor(true);
         }
     }
 }
