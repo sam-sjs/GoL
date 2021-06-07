@@ -101,14 +101,14 @@ namespace GoL.Game.GoLGameEngine
         {
             Location livingCell = _display.GetCursorPosition();
             _world.SetLivingCellAtLocation(livingCell);
-            _display.RefreshWorld(_world); // Second thing the method is doing?
+            _display.RefreshWorld(_world);
         }
 
         private void StartGame()
         {
             do
             {
-                while (!Console.KeyAvailable)
+                while (!_input.KeyAvailable)
                 {   // Below line needs method renaming.
                     List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
                     _world.SetNewCellFormation(nextGeneration);

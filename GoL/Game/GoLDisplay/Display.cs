@@ -35,7 +35,7 @@ namespace GoL.Game.GoLDisplay
         public void World(IInhabitable world)
         {
             bool[,] worldState = world.GetCurrentWorldState();
-            int rows = worldState.GetLength(1); // Check correct dimensions
+            int rows = worldState.GetLength(1);
             int columns = worldState.GetLength(0);
             for (int row = 0; row < rows; row++)
             {

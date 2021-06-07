@@ -4,6 +4,8 @@ namespace GoL.Input
 {
     public class ConsoleInput : IInput
     {
+        public bool KeyAvailable => Console.KeyAvailable;
+
         public string ReadLine()
         {
             return Console.ReadLine();
