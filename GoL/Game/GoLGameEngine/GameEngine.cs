@@ -5,10 +5,10 @@ using System.Threading;
 using GoL.Game.GoLCell;
 using GoL.Game.GoLDisplay;
 using GoL.Game.GoLGeneration;
+using GoL.Game.GoLNavigation;
 using GoL.Game.GoLRules;
 using GoL.Game.GoLWorld;
 using GoL.Input;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace GoL.Game.GoLGameEngine
 {
@@ -18,6 +18,7 @@ namespace GoL.Game.GoLGameEngine
         private readonly Display _display;
         private readonly IInput _input;
         private readonly Generation _generation;
+        private readonly Navigation _navigation;
         private IInhabitable _world;
 
         private readonly Key[] _arrowKeys = new Key[] {Key.Right, Key.Left, Key.Up, Key.Down};
@@ -29,7 +30,7 @@ namespace GoL.Game.GoLGameEngine
             _input = input;
             IRenewable rules = new Rules();
             _generation = new Generation(rules);
-            //object = new Object(); --decide things about cursor
+            _navigation = new Navigation();
         }
 
         public void Run()
@@ -55,8 +56,6 @@ namespace GoL.Game.GoLGameEngine
             _display.EnterHeight();
             int worldHeight = GetValidWorldDimensionFromUser();
             _world = new World(worldWidth, worldHeight);
-            //object.setMaxHeight();
-            //ObjectType.setMaxWidht();
         }
 
         private int GetValidWorldDimensionFromUser()
@@ -78,7 +77,7 @@ namespace GoL.Game.GoLGameEngine
                 input = _input.ReadKey();
                 if (_arrowKeys.Contains(input))
                 {
-                    ProcessUserNavigationalInput(input);
+                    UpdateCursorPosition(input);
                 }
 
                 if (input == Key.Space)
@@ -90,79 +89,12 @@ namespace GoL.Game.GoLGameEngine
             _display.ShowCursor(false);
         }
 
-        // private void UpdateCursorPosition(Key input)
-        // {
-        //     Location cursorPosition = _display.GetCursorPosition();
-        //     // new MaxBounds(maxHeight, maxWidth) -- two fiels maxHeight, maxWidth
-        //     Location newLocation = new Location();//intervening object -- 3 functions -- public (Location,MaxBounds,Key) -> Location. calculateX and calculteY
-        //     _display.SetCursorPosition(newLocation);
-        // }
-        private void ProcessUserNavigationalInput(Key input)
+        private void UpdateCursorPosition(Key input)
         {
             Location cursorPosition = _display.GetCursorPosition();
-            switch (input)
-            {
-                case Key.Up:
-                    MoveCursorUp(cursorPosition);
-                    break;
-                case Key.Down:
-                    MoveCursorDown(cursorPosition);
-                    break;
-                case Key.Left:
-                    MoveCursorLeft(cursorPosition);
-                    break;
-                case Key.Right:
-                    MoveCursorRight(cursorPosition);
-                    break;
-            }
-        }
-
-        private void MoveCursorUp(Location cursorPosition)
-        {
-            if (cursorPosition.Row == 0)
-            {
-                _display.SetCursorPosition(cursorPosition.Column, _world.Rows - 1);
-            }
-            else
-            {
-                _display.SetCursorPosition(cursorPosition.Column, cursorPosition.Row - 1);
-            }
-        }
-
-        private void MoveCursorDown(Location cursorPosition)
-        {
-            if (cursorPosition.Row == _world.Rows - 1)
-            {
-                _display.SetCursorPosition(cursorPosition.Column, 0);
-            }
-            else
-            {
-                _display.SetCursorPosition(cursorPosition.Column, cursorPosition.Row + 1);
-            }
-        }
-
-        private void MoveCursorLeft(Location cursorPosition)
-        {
-            if (cursorPosition.Column == 0)
-            {
-                _display.SetCursorPosition(_world.Columns - 1, cursorPosition.Row);
-            }
-            else
-            {
-                _display.SetCursorPosition(cursorPosition.Column - 1, cursorPosition.Row);
-            }
-        }
-
-        private void MoveCursorRight(Location cursorPosition)
-        {
-            if (cursorPosition.Column == _world.Columns - 1)
-            {
-                _display.SetCursorPosition(0, cursorPosition.Row);
-            }
-            else
-            {
-                _display.SetCursorPosition(cursorPosition.Column + 1, cursorPosition.Row);
-            }
+            WorldBounds bounds = new WorldBounds(_world.Columns, _world.Rows);
+            Location newLocation = _navigation.CalculateNewCursorPosition(cursorPosition, bounds, input);
+            _display.SetCursorPosition(newLocation);
         }
 
         private void SetLivingCellInWorldAtCursorPosition()

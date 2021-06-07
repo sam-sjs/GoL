@@ -65,9 +65,9 @@ namespace GoL.Game.GoLDisplay
             _output.Clear();
         }
 
-        public void SetCursorPosition(int left, int top)
+        public void SetCursorPosition(Location location)
         {
-            _output.SetCursorPosition(left * _output.CellWriteWidth, top);
+            _output.SetCursorPosition(location.Column * _output.CellWriteWidth, location.Row);
         }
 
         public void ResetCursorPosition()
