@@ -41,14 +41,13 @@ namespace GoL.Game.GoLWorld
                     int bottom = row < Rows - 1 ? row + 1 : 0;
                     int left = column > 0 ? column - 1 : Columns - 1;
                     int right = column < Columns - 1 ? column + 1 : 0;
-                    CellFormation[column, row].Neighbours.Add(CellFormation[left, top]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[column, top]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[right, top]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[left, row]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[right, row]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[left, bottom]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[column, bottom]);
-                    CellFormation[column, row].Neighbours.Add(CellFormation[right, bottom]);
+                    List<Cell> neighbours = new List<Cell>
+                    {
+                        CellFormation[left, top], CellFormation[column, top], CellFormation[right, top],
+                        CellFormation[left, row], CellFormation[right, row], CellFormation[left, bottom],
+                        CellFormation[column, bottom], CellFormation[right, bottom]
+                    };
+                    CellFormation[column, row].Neighbours.AddRange(neighbours);
                 }
             }
         }

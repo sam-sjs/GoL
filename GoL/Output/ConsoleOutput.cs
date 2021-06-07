@@ -32,7 +32,7 @@ namespace GoL.Output
             CursorTop = Console.CursorTop;
         }
 
-        public void WriteLivingCell() // Just a name but is it bringing the concept of a cell to output?
+        public void WriteLivingCell()
         {
             Console.Write(new String(LiveCellRepresentation, CellWriteWidth));
         }

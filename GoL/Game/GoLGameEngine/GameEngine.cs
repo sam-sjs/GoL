@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using GoL.Game.GoLCell;
@@ -9,6 +8,7 @@ using GoL.Game.GoLGeneration;
 using GoL.Game.GoLRules;
 using GoL.Game.GoLWorld;
 using GoL.Input;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace GoL.Game.GoLGameEngine
 {
@@ -29,9 +29,9 @@ namespace GoL.Game.GoLGameEngine
             _input = input;
             IRenewable rules = new Rules();
             _generation = new Generation(rules);
+            //object = new Object(); --decide things about cursor
         }
 
-        [SuppressMessage("ReSharper.DPA", "DPA0001: Memory allocation issues")]
         public void Run()
         {
             _display.WelcomeMessage();
@@ -45,7 +45,7 @@ namespace GoL.Game.GoLGameEngine
             _display.Clear();
             _display.World(_world);
             _display.ResetCursorPosition();
-            GetInitialLivingCellsFromUser();
+            GetInitialWorldPatternFromUser();
         }
 
         private void CreateWorld()
@@ -55,6 +55,8 @@ namespace GoL.Game.GoLGameEngine
             _display.EnterHeight();
             int worldHeight = GetValidWorldDimensionFromUser();
             _world = new World(worldWidth, worldHeight);
+            //object.setMaxHeight();
+            //ObjectType.setMaxWidht();
         }
 
         private int GetValidWorldDimensionFromUser()
@@ -68,8 +70,7 @@ namespace GoL.Game.GoLGameEngine
             return dimension;
         }
 
-        private void GetInitialLivingCellsFromUser()
-        // Bad name, this processes user display input or something
+        private void GetInitialWorldPatternFromUser()
         {
             Key input;
             do
@@ -77,19 +78,26 @@ namespace GoL.Game.GoLGameEngine
                 input = _input.ReadKey();
                 if (_arrowKeys.Contains(input))
                 {
-                    ProcessDisplayNavigationalInput(input);
+                    ProcessUserNavigationalInput(input);
                 }
 
                 if (input == Key.Space)
                 {
-                    SetLivingCell();
+                    SetLivingCellInWorldAtCursorPosition();
                 }
             } while (input != Key.Enter);
 
             _display.ShowCursor(false);
         }
 
-        private void ProcessDisplayNavigationalInput(Key input)
+        // private void UpdateCursorPosition(Key input)
+        // {
+        //     Location cursorPosition = _display.GetCursorPosition();
+        //     // new MaxBounds(maxHeight, maxWidth) -- two fiels maxHeight, maxWidth
+        //     Location newLocation = new Location();//intervening object -- 3 functions -- public (Location,MaxBounds,Key) -> Location. calculateX and calculteY
+        //     _display.SetCursorPosition(newLocation);
+        // }
+        private void ProcessUserNavigationalInput(Key input)
         {
             Location cursorPosition = _display.GetCursorPosition();
             switch (input)
@@ -157,8 +165,7 @@ namespace GoL.Game.GoLGameEngine
             }
         }
 
-        private void SetLivingCell()
-        // Rename - this sends the cursor position as a living cell to the world
+        private void SetLivingCellInWorldAtCursorPosition()
         {
             Location livingCell = _display.GetCursorPosition();
             _world.SetLivingCellAtLocation(livingCell);
