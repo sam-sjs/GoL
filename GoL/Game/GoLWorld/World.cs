@@ -2,13 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using GoL.Game.GoLCell;
 using GoL.Game.GoLDisplay;
+using GoL.Game.GoLGeneration;
+using GoL.Game.GoLRules;
+using GoL.Output;
 
 namespace GoL.Game.GoLWorld
 {
-    public class World : IInhabitable
+    public class World : IHabitable
     {
+        private readonly Generation _generation;
         public World(int columns, int rows)
         {
+            IRenewable rules = new Rules();
+            _generation = new Generation(rules);
             Columns = columns;
             Rows = rows;
             CellFormation = new Cell[Columns, Rows];
@@ -19,6 +25,37 @@ namespace GoL.Game.GoLWorld
         public readonly Cell[,] CellFormation;
         public int Columns { get; }
         public int Rows { get; }
+
+        public void SetLivingCellAtLocation(Location location)
+        {
+            CellFormation[location.Column, location.Row].IsAlive = true;
+        }
+
+        public void DisplayInFormation(IOutput output)
+        {
+            for (int row = 0; row < Rows; row++)
+            {
+                for (int column = 0; column < Columns; column++)
+                {
+                    if (CellFormation[column, row].IsAlive)
+                    {
+                        output.WriteLivingCell();
+                    }
+                    else
+                    {
+                        output.WriteDeadCell();
+                    }
+                }
+                if(row < Rows - 1) output.WriteLine();
+            }
+        }
+
+        public void AdvanceToNextGeneration()
+        {
+            List<Cell> currentGeneration = CellFormation.Cast<Cell>().ToList();
+            List<Cell> newGeneration = _generation.BuildNextGeneration(currentGeneration);
+            SetNewCellFormation(newGeneration);
+        }
 
         private void FillWorldWithCells()
         {
@@ -52,12 +89,7 @@ namespace GoL.Game.GoLWorld
             }
         }
 
-        public List<Cell> GetCurrentCellFormation()
-        {
-            return CellFormation.Cast<Cell>().ToList();
-        }
-
-        public void SetNewCellFormation(List<Cell> cellFormation)
+        private void SetNewCellFormation(List<Cell> cellFormation)
         {
             int currentCol = 0;
             int currentRow = 0;
@@ -75,25 +107,6 @@ namespace GoL.Game.GoLWorld
                 }
             }
             AssociateCellsWithNeighbours();
-        }
-
-        public void SetLivingCellAtLocation(Location location)
-        {
-            CellFormation[location.Column, location.Row].IsAlive = true;
-        }
-
-        public bool[,] GetCurrentWorldState()
-        {
-            bool[,] worldState = new bool[Columns, Rows];
-            for (int row = 0; row < Rows; row++)
-            {
-                for (int column = 0; column < Columns; column++)
-                {
-                    worldState[column, row] = CellFormation[column, row].IsAlive;
-                }
-            }
-
-            return worldState;
         }
     }
 }

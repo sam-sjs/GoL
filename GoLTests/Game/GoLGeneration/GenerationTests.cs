@@ -52,7 +52,6 @@ namespace GoLTests.Game.GoLGeneration
 
         [Fact]
         public void BuildNextGeneration_ShouldCreateNewInstanceOfCells()
-        // This test is kind of stupid now, think of something better.
         {
             Rules rules = new Rules();
             Generation generation = new Generation(rules);

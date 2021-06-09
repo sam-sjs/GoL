@@ -55,17 +55,22 @@ namespace GoLTests.Game.GoLDisplay
             Assert.Equal(message, output.Message);
         }
 
-        [Fact]
-        public void DisplayWorld_ShouldShowAnEmptyRepresentationOfTheWorld()
+        [Theory]
+        [InlineData(false, false, "..........\n..........\n..........\n..........\n..........")]
+        [InlineData(true, false, "..........\n..........\n..........\n....██....\n..........")]
+        [InlineData(false, true, "..........\n........██\n..........\n..........\n..........")]
+        [InlineData(true, true, "..........\n........██\n..........\n....██....\n..........")]
+        public void DisplayWorld_ShouldShowACorrectRepresentationOfTheWorld(bool cell1, bool cell2, string expected)
         {
             World world = new World(5, 5);
             TestOutput output = new TestOutput();
             Display display = new Display(output);
-            string message = "..................................................";
-
+            world.CellFormation[2, 3].IsAlive = cell1;
+            world.CellFormation[4, 1].IsAlive = cell2;
+            
             display.World(world);
             
-            Assert.Equal(message, output.Message);
+            Assert.Equal(expected, output.Message);
         }
         
         [Fact]

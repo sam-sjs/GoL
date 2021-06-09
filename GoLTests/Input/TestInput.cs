@@ -13,6 +13,8 @@ namespace GoLTests.Input
             _inputs = inputs;
         }
 
+        public bool KeyAvailable { get; } = false;
+
         public string ReadLine()
         {
             return (string) _inputs[_timesCalled++];

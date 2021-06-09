@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using GoL.Game.GoLCursorNavigation;
 using GoL.Game.GoLDisplay;
-using GoL.Game.GoLNavigation;
 using GoL.Input;
 using Xunit;
 
-namespace GoLTests.Game.GoLNavigation
+namespace GoLTests.Game.GoLCursorNavigationNavigation
 {
     public class NavigationTests
     {
@@ -24,11 +24,11 @@ namespace GoLTests.Game.GoLNavigation
         [MemberData(nameof(GetNavigationalInputs))]
         private void CalculateNewCursorPosition_ReturnsCorrectLocation(Location currentPosition, Key key, Location expected)
         {
-            Navigation navigation = new Navigation();
+            CursorNavigation cursorNavigation = new CursorNavigation();
             WorldBounds bounds = new WorldBounds(20, 10);
 
             Location actual =
-                navigation.CalculateNewCursorPosition(currentPosition, bounds, key);
+                cursorNavigation.CalculateNewCursorPosition(currentPosition, bounds, key);
 
             Assert.Equal(expected, actual);
         }

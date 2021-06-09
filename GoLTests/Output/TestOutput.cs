@@ -12,7 +12,7 @@ namespace GoLTests.Output
 
         public void WriteLine()
         {
-            Message += "";
+            Message += "\n";
         }
         public void WriteLine(string message)
         {

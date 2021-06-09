@@ -1,18 +1,18 @@
 using GoL.Game.GoLDisplay;
 using GoL.Input;
 
-namespace GoL.Game.GoLNavigation
+namespace GoL.Game.GoLCursorNavigation
 {
-    public class Navigation
+    public class CursorNavigation
     {
         public Location CalculateNewCursorPosition(Location cursorPosition, WorldBounds bounds, Key input)
         {
-            int newColumn = CalculateNewColumn(cursorPosition, bounds, input);
-            int newRow = CalculateNewRow(cursorPosition, bounds, input);
-            return new Location(newColumn, newRow);
+            int newColumnPosition = CalculateNewColumnPosition(cursorPosition, bounds, input);
+            int newRowPosition = CalculateNewRowPosition(cursorPosition, bounds, input);
+            return new Location(newColumnPosition, newRowPosition);
         }
 
-        private int CalculateNewColumn(Location currentPosition, WorldBounds bounds, Key key)
+        private int CalculateNewColumnPosition(Location currentPosition, WorldBounds bounds, Key key)
         {
             switch (key)
             {
@@ -25,7 +25,7 @@ namespace GoL.Game.GoLNavigation
             }
         }
 
-        private int CalculateNewRow(Location currentPosition, WorldBounds bounds, Key key)
+        private int CalculateNewRowPosition(Location currentPosition, WorldBounds bounds, Key key)
         {
             switch (key)
             {

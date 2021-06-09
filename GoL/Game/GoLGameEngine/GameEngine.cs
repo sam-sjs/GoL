@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using GoL.Game.GoLCell;
+using GoL.Game.GoLCursorNavigation;
 using GoL.Game.GoLDisplay;
-using GoL.Game.GoLGeneration;
-using GoL.Game.GoLNavigation;
-using GoL.Game.GoLRules;
 using GoL.Game.GoLWorld;
 using GoL.Input;
 
@@ -17,9 +12,8 @@ namespace GoL.Game.GoLGameEngine
         private const int RefreshWorldDelay = 200;
         private readonly Display _display;
         private readonly IInput _input;
-        private readonly Generation _generation;
-        private readonly Navigation _navigation;
-        private IInhabitable _world;
+        private readonly CursorNavigation _cursorNav;
+        private IHabitable _world;
 
         private readonly Key[] _arrowKeys = new Key[] {Key.Right, Key.Left, Key.Up, Key.Down};
 
@@ -28,9 +22,7 @@ namespace GoL.Game.GoLGameEngine
         {
             _display = display;
             _input = input;
-            IRenewable rules = new Rules();
-            _generation = new Generation(rules);
-            _navigation = new Navigation();
+            _cursorNav = new CursorNavigation(); // Move out to program and inject?
         }
 
         public void Run()
@@ -93,7 +85,7 @@ namespace GoL.Game.GoLGameEngine
         {
             Location cursorPosition = _display.GetCursorPosition();
             WorldBounds bounds = new WorldBounds(_world.Columns, _world.Rows);
-            Location newLocation = _navigation.CalculateNewCursorPosition(cursorPosition, bounds, input);
+            Location newLocation = _cursorNav.CalculateNewCursorPosition(cursorPosition, bounds, input);
             _display.SetCursorPosition(newLocation);
         }
 
@@ -109,11 +101,10 @@ namespace GoL.Game.GoLGameEngine
             do
             {
                 while (!_input.KeyAvailable)
-                {   // Below line needs method renaming.
-                    List<Cell> nextGeneration = _generation.BuildNextGeneration(_world.GetCurrentCellFormation());
-                    _world.SetNewCellFormation(nextGeneration);
-                    Thread.Sleep(RefreshWorldDelay);
+                { 
+                    _world.AdvanceToNextGeneration();
                     _display.RefreshWorld(_world);
+                    Thread.Sleep(RefreshWorldDelay);
                 }
             } while (_input.ReadKey() != Key.Quit);
 

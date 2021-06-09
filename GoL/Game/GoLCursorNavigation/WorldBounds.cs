@@ -1,6 +1,6 @@
 using System;
 
-namespace GoL.Game.GoLNavigation
+namespace GoL.Game.GoLCursorNavigation
 {
     public class WorldBounds
     {

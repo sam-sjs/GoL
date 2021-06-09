@@ -32,27 +32,9 @@ namespace GoL.Game.GoLDisplay
             _output.WriteLine(Messages.SetInitialState);
         }
 
-        public void World(IInhabitable world)
+        public void World(IHabitable world)
         {
-            bool[,] worldState = world.GetCurrentWorldState();
-            int rows = worldState.GetLength(1);
-            int columns = worldState.GetLength(0);
-            for (int row = 0; row < rows; row++)
-            {
-                for (int column = 0; column < columns; column++)
-                {
-                    if (worldState[column, row])
-                    {
-                        _output.WriteLivingCell();
-                    }
-                    else
-                    {
-                        _output.WriteDeadCell();
-                    }
-                }
-
-                if (row < rows - 1) _output.WriteLine();
-            }
+            world.DisplayInFormation(_output);
         }
 
         public void InvalidInput()
@@ -80,7 +62,7 @@ namespace GoL.Game.GoLDisplay
             return new Location(_output.CursorLeft / _output.CellWriteWidth, _output.CursorTop);
         }
 
-        public void RefreshWorld(IInhabitable world)
+        public void RefreshWorld(IHabitable world)
         {
             int cursorLeft = _output.CursorLeft;
             int cursorTop = _output.CursorTop;
