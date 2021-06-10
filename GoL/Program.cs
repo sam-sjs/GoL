@@ -1,4 +1,5 @@
-﻿using GoL.Game.GoLDisplay;
+﻿using GoL.Game.GoLCursorNavigation;
+using GoL.Game.GoLDisplay;
 using GoL.Game.GoLGameEngine;
 using GoL.Input;
 using GoL.Output;
@@ -9,10 +10,11 @@ namespace GoL
     {
         static void Main(string[] args)
         {
-            ConsoleOutput output = new ConsoleOutput();
-            ConsoleInput input = new ConsoleInput();
+            IOutput output = new ConsoleOutput();
+            IInput input = new ConsoleInput();
             Display display = new Display(output);
-            GameEngine gameEngine = new GameEngine(display, input);
+            CursorNavigation cursorNav = new CursorNavigation();
+            GameEngine gameEngine = new GameEngine(display, input, cursorNav);
             gameEngine.Run();
         }
     }

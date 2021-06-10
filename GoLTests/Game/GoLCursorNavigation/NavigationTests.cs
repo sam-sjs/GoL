@@ -4,7 +4,7 @@ using GoL.Game.GoLDisplay;
 using GoL.Input;
 using Xunit;
 
-namespace GoLTests.Game.GoLCursorNavigationNavigation
+namespace GoLTests.Game.GoLCursorNavigation
 {
     public class NavigationTests
     {

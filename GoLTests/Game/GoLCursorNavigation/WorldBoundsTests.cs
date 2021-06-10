@@ -1,7 +1,7 @@
 using GoL.Game.GoLCursorNavigation;
 using Xunit;
 
-namespace GoLTests.Game.GoLCursorNavigationNavigation
+namespace GoLTests.Game.GoLCursorNavigation
 {
     public class WorldBoundsTests
     {

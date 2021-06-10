@@ -18,11 +18,11 @@ namespace GoL.Game.GoLGameEngine
         private readonly Key[] _arrowKeys = new Key[] {Key.Right, Key.Left, Key.Up, Key.Down};
 
 
-        public GameEngine(Display display, IInput input)
+        public GameEngine(Display display, IInput input, CursorNavigation cursorNav)
         {
             _display = display;
             _input = input;
-            _cursorNav = new CursorNavigation(); // Move out to program and inject?
+            _cursorNav = cursorNav;
         }
 
         public void Run()
