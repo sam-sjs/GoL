@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoL.Game.GoLCell
+namespace GoL.Domain.Core
 {
     public class Cell
     {
